@@ -90,4 +90,5 @@ erDiagram
 ```
 
 ## External Documentation
+Lucidchart Entity Relationship Diagram
 https://lucid.app/lucidchart/a1a9e55d-43e0-45b9-b00c-4dd90883ca9e/edit?page=0_0&invitationId=inv_d93c240d-3219-4929-8448-5eb199125460#
