@@ -23,7 +23,9 @@ TBC
 ## Domain Model
 
 Games
+
 Platforms
+
 Users
 
 ## ERD 
