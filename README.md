@@ -42,6 +42,10 @@ erDiagram
                 int id
                 string name
                 datetime release_date
-            }
+        }
+        platforms {
+                int id
+                string name                
+        }
 
 ```
