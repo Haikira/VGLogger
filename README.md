@@ -18,10 +18,12 @@ TBC
 - Create a Game
 - Create a Platform
 - Create a Review
+- Create a Developer
 
 **V1 Goals**
 
 - Retrieve a list of coming soon games (sort by date, display how many days until game is out, etc)
+- 
 
 ## Domain Model
 
