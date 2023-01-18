@@ -1,6 +1,7 @@
 # VGLogger
 
-VGLogger is an application that tracks video games that a user has in their collection, as well as logging titles the user is currently playing or has completed.
+VGLogger is an application for logging and maintaining a user's collection of video games, and tracking which titles the user has completed, yet to play, etc.
+The user may be able to review each game title, leaving a star rating, and a text description.
 
 ## Goals
 
@@ -21,5 +22,7 @@ Games
 Platforms
 
 Users
+
+Reviews
 
 ## ERD 
