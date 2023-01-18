@@ -85,6 +85,6 @@ erDiagram
         games }|--|| users_games: "uses"
         users }|--|| users_games: "uses"
         games }|--|| developers: "uses"
-        reviews }|--|| games: "uses"
+        reviews }|--|| users_games: "uses"
 
 ```
