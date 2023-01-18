@@ -31,6 +31,7 @@ erDiagram
         games }|--|{ games_platforms : "contains"
         platforms }|--|{ games_platforms : "contains"
         games }|--|{ reviews : "contains"
+        users}|--|{ games : "contains"
 ```
 
 ## ERD 
