@@ -21,6 +21,9 @@ TBC
 
 **V1 Goals**
 
+- Ability to add coming soon dates to games
+- Retrieve a list of coming soon games (sort by date, display how many days until game is out, etc)
+
 ## Domain Model
 
 Games
