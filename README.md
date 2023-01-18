@@ -33,6 +33,7 @@ erDiagram
         games }|--|{ users_games : "contains"
         users}|--|{ users_games : "contains"
         reviews }|--|{ users_games : "contains"
+        games }|--|{ developers : "contains"
 ```
 
 ## ERD 
