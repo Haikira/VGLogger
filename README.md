@@ -69,6 +69,10 @@ erDiagram
                 string email
                 string password
         }
+        developers {
+                int id
+                string name
+        }
         
         games }|--|| games_platforms: "uses"
         platforms }|--|| games_platforms: "uses"
