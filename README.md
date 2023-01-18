@@ -33,3 +33,9 @@ erDiagram
 ```
 
 ## ERD 
+``` mermaid
+%%{init: {'theme': 'dark' } }%%
+
+erDiagram
+
+```
