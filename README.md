@@ -73,6 +73,12 @@ erDiagram
                 int id
                 string name
         }
+        reviews {
+                int id
+                int star_rating
+                string description
+                int users_games_id
+        }
         
         games }|--|| games_platforms: "uses"
         platforms }|--|| games_platforms: "uses"
