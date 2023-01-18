@@ -46,7 +46,7 @@ erDiagram
                 string name
                 datetime release_date
                 string description
-                string developer_id
+                string developers_id
         }
         platforms {
                 int id
