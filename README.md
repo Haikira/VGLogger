@@ -32,7 +32,7 @@ erDiagram
         platforms }|--|{ games_platforms : "contains"
         games }|--|{ users_games : "contains"
         users}|--|{ users_games : "contains"
-        games }|--|{ reviews : "contains"
+        games }|--|{ users_games : "contains"
 ```
 
 ## ERD 
