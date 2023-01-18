@@ -50,5 +50,12 @@ erDiagram
                 int id
                 string name                
         }
+        games_platforms {
+                int id
+                int games_id
+                int platforms_id
+        }
+        
+        games }|--|| games_platforms: "uses"
 
 ```
