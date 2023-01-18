@@ -57,5 +57,6 @@ erDiagram
         }
         
         games }|--|| games_platforms: "uses"
+        platforms }|--|| games_platforms: "uses"
 
 ```
