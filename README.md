@@ -22,7 +22,9 @@ TBC
 
 ## Domain Model
 
-TBC
+Games
+Platforms
+Users
 
 ## ERD 
 
