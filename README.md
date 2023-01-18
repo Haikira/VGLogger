@@ -55,6 +55,11 @@ erDiagram
                 int games_id
                 int platforms_id
         }
+        users_games {
+                int id
+                int users_id
+                int games_id
+        }
         
         games }|--|| games_platforms: "uses"
         platforms }|--|| games_platforms: "uses"
