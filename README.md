@@ -8,17 +8,11 @@ TBC
 
 ## Solution
 
-TBC
-
 ## Project Outline
 
 **MVP**
 
-TBC
-
 **V1 Goals**
-
-TBC
 
 ## Domain Model
 
@@ -29,5 +23,3 @@ Platforms
 Users
 
 ## ERD 
-
-TBC
