@@ -38,4 +38,9 @@ erDiagram
 
 erDiagram
 
+        games {
+                int id
+                string name
+            }
+
 ```
