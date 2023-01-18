@@ -46,7 +46,7 @@ erDiagram
                 string name
                 datetime release_date
                 string description
-                string developer
+                string developer_id
         }
         platforms {
                 int id
@@ -78,5 +78,6 @@ erDiagram
         platforms }|--|| games_platforms: "uses"
         games }|--|| users_games: "uses"
         users }|--|| users_games: "uses"
+        games }|--|| developers: "uses"
 
 ```
