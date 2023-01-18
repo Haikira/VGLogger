@@ -41,6 +41,7 @@ erDiagram
         games {
                 int id
                 string name
+                datetime releaseDate
             }
 
 ```
