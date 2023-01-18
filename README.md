@@ -60,6 +60,13 @@ erDiagram
                 int users_id
                 int games_id
         }
+        users {
+                int id
+                string first_name
+                string last_name
+                string email
+                string password
+        }
         
         games }|--|| games_platforms: "uses"
         platforms }|--|| games_platforms: "uses"
