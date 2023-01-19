@@ -6,9 +6,9 @@ The user may be able to review each game title, leaving a star rating, and a tex
 
 ## Goals
 
-TBC
-
-## Solution
+- To provide users with an easy to use tool for managing their game collection
+- Offer functionality for reviewing games
+- Offer functionality for viewing games yet to play
 
 ## Project Outline
 
