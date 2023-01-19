@@ -23,7 +23,6 @@ The user may be able to review each game title, leaving a star rating, and a tex
 **V1 Goals**
 
 - Retrieve a list of coming soon games (sort by date, display how many days until game is out, etc)
-- 
 
 ## Domain Model
 
