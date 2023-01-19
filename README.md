@@ -35,7 +35,7 @@ erDiagram
         users}|--|{ users_games : "contains"
         reviews }|--|{ users_games : "contains"
         games }|--|{ developers : "contains"
-        completions }|--|{ developers : "contains"
+        completions }|--|{ users_games : "contains"
 ```
 
 ## ERD 
