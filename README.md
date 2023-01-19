@@ -84,6 +84,7 @@ erDiagram
         completions {
                 int id
                 datetime date_completed
+                int users_games_id
         }
         
         games }|--|| games_platforms: "uses"
@@ -92,6 +93,7 @@ erDiagram
         users }|--|| users_games: "uses"
         games }|--|| developers: "uses"
         reviews }|--|| users_games: "uses"
+        completions }|--|| users_games: "uses"
 
 ```
 
