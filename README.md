@@ -81,6 +81,10 @@ erDiagram
                 string description
                 int users_games_id
         }
+        completions {
+                int id
+                datetime date_completed
+        }
         
         games }|--|| games_platforms: "uses"
         platforms }|--|| games_platforms: "uses"
