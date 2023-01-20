@@ -91,6 +91,7 @@ erDiagram
         }
         
         games }|--|| developers: "uses"
+        games_platforms }|--|| platforms: "uses"
 
 ```
 
