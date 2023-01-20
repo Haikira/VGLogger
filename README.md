@@ -96,7 +96,6 @@ erDiagram
         reviews }|--|| users: "uses"        
         completions }|--|| users_games: "uses"
         games_platforms }|--|| games: "uses"
-        
         users_games }|--|| games_platforms: "uses"
         users_games }|--|| users: "uses"
 
