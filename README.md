@@ -90,14 +90,7 @@ erDiagram
                 int user_game_id
         }
         
-        games }|--|| games_platforms: "uses"
-        platforms }|--|| games_platforms: "uses"
-        users_games }|--|| games: "uses"
-        users }|--|| users_games: "uses"
         games }|--|| developers: "uses"
-        reviews }|--|| games: "uses"
-        reviews }|--|| users: "uses"
-        completions }|--|| users_games: "uses"
 
 ```
 
