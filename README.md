@@ -81,7 +81,8 @@ erDiagram
                 int star_rating
                 string description
                 datetime date_reviewed
-                int user_game_id
+                int game_id
+                int user_id
         }
         completions {
                 int id
@@ -94,7 +95,7 @@ erDiagram
         games }|--|| users_games: "uses"
         users }|--|| users_games: "uses"
         games }|--|| developers: "uses"
-        reviews }|--|| users_games: "uses"
+        reviews }|--|| games: "uses"
         completions }|--|| users_games: "uses"
 
 ```
