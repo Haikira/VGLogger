@@ -92,6 +92,8 @@ erDiagram
         
         games }|--|| developers: "uses"
         games_platforms }|--|| platforms: "uses"
+        reviews }|--|| games: "uses"
+        reviews }|--|| users: "uses"
 
 ```
 
