@@ -46,10 +46,9 @@ erDiagram
 
         games {
                 int id
-                string name
-                datetime release_date
+                string name                
                 string description
-                string developers_id
+                string developer_id
         }
         platforms {
                 int id
@@ -57,13 +56,14 @@ erDiagram
         }
         games_platforms {
                 int id
-                int games_id
-                int platforms_id
+                int game_id
+                int platform_id
+                datetime release_date
         }
         users_games {
                 int id
-                int users_id
-                int games_id
+                int user_id
+                int game_id
         }
         users {
                 int id
@@ -80,12 +80,13 @@ erDiagram
                 int id
                 int star_rating
                 string description
-                int users_games_id
+                datetime date_reviewed
+                int user_game_id
         }
         completions {
                 int id
                 datetime date_completed
-                int users_games_id
+                int user_game_id
         }
         
         games }|--|| games_platforms: "uses"
