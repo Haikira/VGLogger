@@ -63,7 +63,7 @@ erDiagram
         users_games {
                 int id
                 int user_id
-                int game_id
+                int game_platform_id
         }
         users {
                 int id
@@ -96,6 +96,8 @@ erDiagram
         reviews }|--|| users: "uses"        
         completions }|--|| users_games: "uses"
         games_platforms }|--|| games: "uses"
+        
+        users_games }|--|| games_platforms: "uses"
 
 ```
 
