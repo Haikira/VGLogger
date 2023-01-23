@@ -13,7 +13,7 @@ services:
       - db:/var/lib/postgresql/data
   flyway:
     image: flyway/flyway
-    command: -url=jdbc:postgresql://db/DbNameGoesHere -schemas=public -user=postgres
+    command: -url=jdbc:postgresql://db/vglogger -schemas=public -user=postgres
       -password=password -connectRetries=5 migrate
     volumes:
       - ./database:/flyway/sql
