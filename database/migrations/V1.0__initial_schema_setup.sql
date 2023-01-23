@@ -33,7 +33,8 @@ CREATE TABLE public.platforms (
 );
 CREATE TABLE public.developers (
     [id] SERIAL NOT NULL,
-    [name] VARCHAR(255)
+    [name] VARCHAR(255),
+    CONSTRAINT developers_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.games (
     [id] SERIAL NOT NULL,
