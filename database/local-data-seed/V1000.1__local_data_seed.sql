@@ -28,12 +28,6 @@ insert into users_games ([user_id], [game_platform_id]) values ((select id from 
 insert into users_games ([user_id], [game_platform_id]) values ((select id from users where [first_name] ='Campbell'), (select id from games_platforms where [game_id] = (select id from games where [name] ='Elden Ring') AND [platform_id] = (select id from platforms where [name] ='Playstation 5')))
 insert into users_games ([user_id], [game_platform_id]) values ((select id from users where [first_name] ='Campbell'), (select id from games_platforms where [game_id] = (select id from games where [name] ='Uncharted 4') AND [platform_id] = (select id from platforms where [name] ='Playstation 4')))
 
--- TODO 
+insert into completions ([datetime], [user_game_id]) values ('2023-01-02', (select id from users_games where [user_id] = (select id from users where [first_name] ='Campbell') AND [game_platform_id] = (select id from games_platforms where [game_id] = (select id from games where [name] ='God of War Ragnarok') AND [platform_id] = (select id from platforms where [name] ='Playstation 5'))))
 
---insert into completions ([datetime], [user_game_id]) values ()
---insert into completions ([datetime], [user_game_id]) values ()
---insert into completions ([datetime], [user_game_id]) values ()
-
---insert into reviews ([star_rating], [description], [date_reviewed], [game_id], [user_id]) values ()
---insert into reviews ([star_rating], [description], [date_reviewed], [game_id], [user_id]) values ()
---insert into reviews ([star_rating], [description], [date_reviewed], [game_id], [user_id]) values ()
+insert into reviews ([star_rating], [description], [date_reviewed], [game_id], [user_id]) values (5, 'Good stuff!', '2023-01-23', (select id from games where [name] ='God of War Ragnarok'), (select id from users where [first_name] ='Campbell'))
