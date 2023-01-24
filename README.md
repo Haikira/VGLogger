@@ -30,12 +30,13 @@ The user may be able to review each game title, leaving a star rating, and a tex
 erDiagram
 
         games }|--|{ games_platforms : "contains"
-        platforms }|--|{ games_platforms : "contains"
         games }|--|{ users_games : "contains"
-        users}|--|{ users_games : "contains"
+        platforms }|--|{ games_platforms : "contains" 
         reviews }|--|{ users_games : "contains"
-        games }|--|{ developers : "contains"
+        users}|--|{ users_games : "contains"
         completions }|--|{ users_games : "contains"
+        games }|--|{ developers : "contains"
+        
 ```
 
 ## ERD 
@@ -95,8 +96,7 @@ erDiagram
         games_platforms }|--|| games: "uses"
         reviews }|--|| games_platforms: "uses"       
         reviews }|--|| users: "uses"       
-        completions }|--|| users_games: "uses"
-        
+        completions }|--|| users_games: "uses"        
         users_games }|--|| games_platforms: "uses"
         users_games }|--|| users: "uses"
 
@@ -116,9 +116,19 @@ https://lucid.app/lucidchart/a1a9e55d-43e0-45b9-b00c-4dd90883ca9e/edit?page=0_0&
 
 **USERS**
 
+GET /users/{id}
+
+GET /users
+
+POST /users
+
+DELETE /users/{id}
+
+
+
 **GAMES**
 
-GET /games Returns all games
+GET /games Returns all games.
 
 Response
 
@@ -131,7 +141,7 @@ Response
   }
 ]
 
-GET /games/{id} Returns a game and all platforms it belongs to
+GET /games/{id} Returns a game and all platforms it belongs to.
 
 Response 
 
@@ -152,3 +162,36 @@ Response
     }]
   }
 ]
+
+POST /games Creates game.
+
+Request 
+
+{
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : 1
+}
+
+
+PUT /games/{id}
+{
+    "id": 1,
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : 1
+}
+
+DELETE /games/{id}
+
+
+
+**REVIEWS**
+
+GET /reviews/{id}
+
+GET /reviews
+
+POST /reviews
+
+DELETE /reviews/{id}
