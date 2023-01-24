@@ -100,7 +100,15 @@ erDiagram
         users_games }|--|| games_platforms: "uses"
         users_games }|--|| users: "uses"
 
+
+
 ```
+
+## External Documentation
+
+**Lucidchart Entity Relationship Diagram**
+
+https://lucid.app/lucidchart/a1a9e55d-43e0-45b9-b00c-4dd90883ca9e/edit?page=0_0&invitationId=inv_d93c240d-3219-4929-8448-5eb199125460#
 
 ```
 
@@ -110,8 +118,37 @@ API Specification
 
 **GAMES**
 
-## External Documentation
+GET /games Returns all games
 
-**Lucidchart Entity Relationship Diagram**
+Response
 
-https://lucid.app/lucidchart/a1a9e55d-43e0-45b9-b00c-4dd90883ca9e/edit?page=0_0&invitationId=inv_d93c240d-3219-4929-8448-5eb199125460#
+[
+  {
+    "id": 1,
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : "Rockstar Games"
+  }
+]
+
+GET /games/{id} Returns a game and all platforms it belongs to
+
+Response 
+
+[
+  {
+    "id": 1,
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : "Rockstar Games",
+    "games_platforms" : [{
+        "id": 8,
+        "platform_": "Playstation 4",
+        "release_date": "2018-10-26"
+    }, {
+        "id": 9,
+        "platform": "Windows",
+        "release_date": "2019-11-19"
+    }]
+  }
+]
