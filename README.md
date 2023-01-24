@@ -102,6 +102,14 @@ erDiagram
 
 ```
 
+```
+
+API Specification
+
+**USERS**
+
+**GAMES**
+
 ## External Documentation
 
 **Lucidchart Entity Relationship Diagram**
