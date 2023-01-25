@@ -146,7 +146,10 @@ Response
     "id": 1,
     "name": "Red Dead Redemption 2",
     "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
-    "developer" : "Rockstar Games"
+    "developer" : {
+        "id": 1,
+        "name":"Rockstar Games"
+    }
   }
 ]
 
@@ -159,8 +162,11 @@ Response
     "id": 1,
     "name": "Red Dead Redemption 2",
     "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
-    "developer" : "Rockstar Games",
-    "games_platforms" : [{
+    "developer" : {
+        "id": 1,
+        "name":"Rockstar Games"
+    },
+    "platforms" : [{
         "id": 8,
         "platform_": "Playstation 4",
         "release_date": "2018-10-26"
@@ -171,7 +177,6 @@ Response
     }]
   }
 ]
-
 POST /games Creates game.
 
 Request 
