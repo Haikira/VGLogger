@@ -180,6 +180,7 @@ Response
     }]
   }
 ]
+
 POST /games Creates game.
 
 Request 
@@ -192,6 +193,9 @@ Request
 
 
 PUT /games/{id}
+
+Request 
+
 {
     "id": 1,
     "name": "Red Dead Redemption 2",
@@ -210,19 +214,65 @@ GET /reviews
 POST /reviews
 DELETE /reviews/{id}
 
+
+
 **PLATFORMS**
 
 GET /platforms/{id}
+
+Response
+
+[
+  {
+    "id": 1,
+    "name": "Playstation 4"
+  }
+]
+
 GET /platforms
+
+Response
+
+[
+  {
+    "id": 1,
+    "name": "Playstation 4"
+  },
+  {
+    "id": 2,
+    "name": "Playstation 5"
+  }
+]
+
 POST /platforms
+
+Request
+
 PUT /platforms/{id}
+
+Request
+
 DELETE /platforms/{id} (Soft Delete)
+
+
 
 **DEVELOPERS**
 
 GET /developers/{id}
+
+Response
+
 GET /developers
+
+Response
+
 POST /developers
+
+Request
+
 PUT /developers/{id}
+
+Request
+
 DELETE /developers/{id} (Soft Delete)
 
