@@ -20,7 +20,7 @@ The user may be able to review each game title, leaving a star rating, and a tex
 - Create a Platform
 - Create a Review
 - Create a Developer
-- Create new Game Dates against a user's game
+- Create new Game Dates against a user's Game
 
 **V1 Goals**
 
