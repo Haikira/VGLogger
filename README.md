@@ -238,6 +238,9 @@ Response
 
 GET /reviews
 
+TODO - Should this be games/{id}/reviews ?
+       or should this be a get all that returns same structure as get/{id} ?
+
 Response
 
 POST /reviews
