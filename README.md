@@ -125,14 +125,15 @@ https://lucid.app/lucidchart/a1a9e55d-43e0-45b9-b00c-4dd90883ca9e/edit?page=0_0&
 **USERS**
 
 GET /users/{id}
-
 GET /users
-
+GET /users/{id}/games
 POST /users
-
+POST /users/{id}/games
+POST /users/{id}/games/{id}
+PUT /users/{id}
+PUT /users/{id}/games/{id}
 DELETE /users/{id}
-
-
+DELETE /users/{id}/games/{id}
 
 **GAMES**
 
@@ -197,9 +198,23 @@ DELETE /games/{id}
 **REVIEWS**
 
 GET /reviews/{id}
-
 GET /reviews
-
 POST /reviews
-
 DELETE /reviews/{id}
+
+**PLATFORMS**
+
+GET /platforms/{id}
+GET /platforms
+POST /platforms
+PUT /platforms/{id}
+DELETE /platforms/{id} (Soft Delete)
+
+**DEVELOPERS**
+
+GET /developers/{id}
+GET /developers
+POST /developers
+PUT /developers/{id}
+DELETE /developers/{id} (Soft Delete)
+
