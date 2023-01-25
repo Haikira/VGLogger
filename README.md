@@ -156,7 +156,7 @@ Response
         "id": 2,
         "name":"PlatinumGames Inc."
     }
-  },
+  }
 ]
 
 GET /games/{id} Returns a game and all platforms it belongs to.
@@ -280,9 +280,18 @@ POST /platforms
 
 Request
 
+{
+    "name": "Dreamcast"
+}
+
 PUT /platforms/{id}
 
 Request
+
+{
+    "id": 3,
+    "name": "Sega Dreamcast"
+}
 
 DELETE /platforms/{id} (Soft Delete)
 
