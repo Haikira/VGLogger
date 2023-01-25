@@ -153,7 +153,16 @@ Response
         "id": 1,
         "name":"Rockstar Games"
     }
-  }
+  },
+  {
+    "id": 2,
+    "name": "NieR:Automata",
+    "description": "NieR Automata tells the story of androids 2B, 9S and A2 and their battle to reclaim the machine-driven dystopia overrun by powerful machines.",
+    "developer" : {
+        "id": 2,
+        "name":"PlatinumGames Inc."
+    }
+  },
 ]
 
 GET /games/{id} Returns a game and all platforms it belongs to.
