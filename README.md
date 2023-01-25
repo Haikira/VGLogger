@@ -85,18 +85,25 @@ erDiagram
                 int game_id
                 int user_id
         }
-        completions {
+        game_dates {
                 int id
-                datetime date_completed
+                datetime date
+                int date_type_id
                 int user_game_id
         }
+        date_types{
+             int id
+             string date_type
+        }
+        
         
         games }|--|| developers: "uses"
         games_platforms }|--|| platforms: "uses"
         games_platforms }|--|| games: "uses"
         reviews }|--|| games_platforms: "uses"       
         reviews }|--|| users: "uses"       
-        completions }|--|| users_games: "uses"        
+        game_dates }|--|| users_games: "uses"        
+        game_dates }|--|| date_types: "uses"        
         users_games }|--|| games_platforms: "uses"
         users_games }|--|| users: "uses"
 
