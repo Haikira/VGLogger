@@ -34,7 +34,8 @@ erDiagram
         platforms }|--|{ games_platforms : "contains" 
         reviews }|--|{ users_games : "contains"
         users}|--|{ users_games : "contains"
-        completions }|--|{ users_games : "contains"
+        game_dates }|--|{ users_games : "contains"
+        date_types }|--|{ game_dates : "contains"
         games }|--|{ developers : "contains"
         
 ```
