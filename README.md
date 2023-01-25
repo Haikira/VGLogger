@@ -7,8 +7,9 @@ The user may be able to review each game title, leaving a star rating, and a tex
 ## Goals
 
 - To provide users with an easy to use tool for managing their game collection
+- Capture archival records of when games have been purchased, completed, etc
 - Offer functionality for reviewing games
-- Offer functionality to view games yet to play
+- Offer functionality to view games in a collection yet to be played
 
 ## Project Outline
 
@@ -19,6 +20,7 @@ The user may be able to review each game title, leaving a star rating, and a tex
 - Create a Platform
 - Create a Review
 - Create a Developer
+- Create new Game Dates against a user's Game
 
 **V1 Goals**
 
@@ -29,13 +31,16 @@ The user may be able to review each game title, leaving a star rating, and a tex
 ``` mermaid
 erDiagram
 
-        games }|--|{ games_platforms : "contains"
-        platforms }|--|{ games_platforms : "contains"
-        games }|--|{ users_games : "contains"
-        users}|--|{ users_games : "contains"
-        reviews }|--|{ users_games : "contains"
-        games }|--|{ developers : "contains"
-        completions }|--|{ users_games : "contains"
+        games }|--|{ games_platforms : ""
+        games }|--|{ developers : ""
+        platforms }|--|{ games_platforms : "" 
+        reviews }|--|{ games_platforms : ""
+        games_platforms }|--|{ users_games : ""
+        users}|--|{ users_games : ""
+        game_dates }|--|{ users_games : ""
+        date_types }|--|{ game_dates : ""
+        reviews }|--|{ users : ""
+        
 ```
 
 ## ERD 
@@ -84,24 +89,234 @@ erDiagram
                 int game_id
                 int user_id
         }
-        completions {
+        game_dates {
                 int id
-                datetime date_completed
+                datetime date
+                int date_type_id
                 int user_game_id
         }
+        date_types{
+             int id
+             string date_type
+        }
+        
         
         games }|--|| developers: "uses"
         games_platforms }|--|| platforms: "uses"
-        reviews }|--|| games_platforms: "uses"       
-        completions }|--|| users_games: "uses"
         games_platforms }|--|| games: "uses"
+        reviews }|--|| games_platforms: "uses"       
+        reviews }|--|| users: "uses"       
+        game_dates }|--|| users_games: "uses"        
+        game_dates }|--|| date_types: "uses"        
         users_games }|--|| games_platforms: "uses"
         users_games }|--|| users: "uses"
 
+
+
 ```
 
-## External Documentation
+## API Specification
 
-**Lucidchart Entity Relationship Diagram**
+```
 
-https://lucid.app/lucidchart/a1a9e55d-43e0-45b9-b00c-4dd90883ca9e/edit?page=0_0&invitationId=inv_d93c240d-3219-4929-8448-5eb199125460#
+**USERS**
+
+GET /users/{id}
+GET /users
+GET /users/{id}/games
+POST /users
+POST /users/{id}/games
+POST /users/{id}/games/{id}
+PUT /users/{id}
+PUT /users/{id}/games/{id}
+DELETE /users/{id}
+DELETE /users/{id}/games/{id}
+
+**GAMES**
+
+GET /games Returns all games.
+
+Response
+
+[
+  {
+    "id": 1,
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : {
+        "id": 1,
+        "name":"Rockstar Games"
+    }
+  },
+  {
+    "id": 2,
+    "name": "NieR:Automata",
+    "description": "NieR Automata tells the story of androids 2B, 9S and A2 and their battle to reclaim the machine-driven dystopia overrun by powerful machines.",
+    "developer" : {
+        "id": 2,
+        "name":"PlatinumGames Inc."
+    }
+  }
+]
+
+GET /games/{id} Returns a game and all platforms it belongs to.
+
+Response 
+
+[
+  {
+    "id": 1,
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : {
+        "id": 1,
+        "name":"Rockstar Games"
+    },
+    "platforms" : [{
+        "id": 8,
+        "platform_": "Playstation 4",
+        "release_date": "2018-10-26"
+    }, {
+        "id": 9,
+        "platform": "Windows",
+        "release_date": "2019-11-19"
+    }]
+  }
+]
+
+POST /games Creates game.
+
+Request 
+
+{
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : 1
+}
+
+
+PUT /games/{id}
+
+Request 
+
+{
+    "id": 1,
+    "name": "Red Dead Redemption 2",
+    "description": "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+    "developer" : 1
+}
+
+DELETE /games/{id}
+
+
+
+**REVIEWS**
+
+GET /reviews/{id}
+
+Response
+
+[
+  {
+    "id": 1,
+    "rating": 4,
+    "description":"This game is great, but it needs more dinosaurs.",
+    "date": "2023-01-25",
+    "game" : {
+        "id": 2,
+        "name": "PGA TOUR 2K23",
+        "description": "Hit the links with more swagger in PGA TOUR 2K23."
+    },
+    "user" : {
+        "id": 117,
+        "forename": "John",
+        "surname": "Pliskin",
+        "email":"snakepliskin@gmail.com"
+    }
+  }
+]
+
+GET /reviews
+
+TODO - Should this be games/{id}/reviews ?
+       or should this be a get all that returns same structure as get/{id} ?
+
+Response
+
+POST /reviews
+
+Request
+
+DELETE /reviews/{id}
+
+
+
+**PLATFORMS**
+
+GET /platforms/{id}
+
+Response
+
+[
+  {
+    "id": 1,
+    "name": "Playstation 4"
+  }
+]
+
+GET /platforms
+
+Response
+
+[
+  {
+    "id": 1,
+    "name": "Playstation 4"
+  },
+  {
+    "id": 2,
+    "name": "Playstation 5"
+  }
+]
+
+POST /platforms
+
+Request
+
+{
+    "name": "Dreamcast"
+}
+
+PUT /platforms/{id}
+
+Request
+
+{
+    "id": 3,
+    "name": "Sega Dreamcast"
+}
+
+DELETE /platforms/{id} (Soft Delete)
+
+
+
+**DEVELOPERS**
+
+GET /developers/{id}
+
+Response
+
+GET /developers
+
+Response
+
+POST /developers
+
+Request
+
+PUT /developers/{id}
+
+Request
+
+DELETE /developers/{id} (Soft Delete)
+
