@@ -7,8 +7,9 @@ The user may be able to review each game title, leaving a star rating, and a tex
 ## Goals
 
 - To provide users with an easy to use tool for managing their game collection
+- Capture archival records of when games have been purchased, completed, etc
 - Offer functionality for reviewing games
-- Offer functionality to view games yet to play
+- Offer functionality to view games in a collection yet to be played
 
 ## Project Outline
 
@@ -19,6 +20,7 @@ The user may be able to review each game title, leaving a star rating, and a tex
 - Create a Platform
 - Create a Review
 - Create a Developer
+- Create new Game Dates against a user's game
 
 **V1 Goals**
 
@@ -29,14 +31,15 @@ The user may be able to review each game title, leaving a star rating, and a tex
 ``` mermaid
 erDiagram
 
-        games }|--|{ games_platforms : "contains"
-        games }|--|{ users_games : "contains"
-        platforms }|--|{ games_platforms : "contains" 
-        reviews }|--|{ users_games : "contains"
-        users}|--|{ users_games : "contains"
-        game_dates }|--|{ users_games : "contains"
-        date_types }|--|{ game_dates : "contains"
-        games }|--|{ developers : "contains"
+        games }|--|{ games_platforms : ""
+        games }|--|{ developers : ""
+        platforms }|--|{ games_platforms : "" 
+        reviews }|--|{ games_platforms : ""
+        games_platforms }|--|{ users_games : ""
+        users}|--|{ users_games : ""
+        game_dates }|--|{ users_games : ""
+        date_types }|--|{ game_dates : ""
+        reviews }|--|{ users : ""
         
 ```
 
