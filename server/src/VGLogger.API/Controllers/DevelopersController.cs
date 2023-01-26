@@ -21,7 +21,19 @@ public class DevelopersController : ControllerBase
     [HttpGet]
     public ActionResult<IList<DeveloperViewModel>> GetDevelopers()
     {
-        var ret = new List<DeveloperViewModel>();
+        var ret = new List<DeveloperViewModel> 
+        { 
+            new DeveloperViewModel
+            {
+                Id = 1,
+                Name = "Rockstar Games"
+            },
+            new DeveloperViewModel
+            {
+                Id = 2,
+                Name = "Naughty Dog"
+            }
+        };
 
         return new ActionResult<IList<DeveloperViewModel>>(ret);
     }
@@ -34,7 +46,11 @@ public class DevelopersController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<DeveloperViewModel> GetDeveloperById(int id)
     {
-        var ret = new DeveloperViewModel();
+        var ret = new DeveloperViewModel
+        {
+            Id = 1,
+            Name = "Rockstar Games"
+        };
 
         return new ActionResult<DeveloperViewModel>(ret);
     }
