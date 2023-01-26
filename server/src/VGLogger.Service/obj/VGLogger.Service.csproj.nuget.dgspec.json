@@ -1,0 +1,148 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\repos\\VGLogger\\server\\src\\VGLogger.Service\\VGLogger.Service.csproj": {}
+  },
+  "projects": {
+    "C:\\repos\\VGLogger\\server\\src\\VGLogger.DAL\\VGLogger.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\repos\\VGLogger\\server\\src\\VGLogger.DAL\\VGLogger.DAL.csproj",
+        "projectName": "VGLogger.DAL",
+        "projectPath": "C:\\repos\\VGLogger\\server\\src\\VGLogger.DAL\\VGLogger.DAL.csproj",
+        "packagesPath": "C:\\Users\\Campbell Gilpin\\.nuget\\packages\\",
+        "outputPath": "C:\\repos\\VGLogger\\server\\src\\VGLogger.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Campbell Gilpin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ICE-Enterprise/_packaging/Ovs.Dev.Nuget/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/arrivia/_packaging/arrivia.dev.nuget/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Unosquare.EntityFramework.Specification.EFCore": {
+              "target": "Package",
+              "version": "[1.0.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\repos\\VGLogger\\server\\src\\VGLogger.Service\\VGLogger.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\repos\\VGLogger\\server\\src\\VGLogger.Service\\VGLogger.Service.csproj",
+        "projectName": "VGLogger.Service",
+        "projectPath": "C:\\repos\\VGLogger\\server\\src\\VGLogger.Service\\VGLogger.Service.csproj",
+        "packagesPath": "C:\\Users\\Campbell Gilpin\\.nuget\\packages\\",
+        "outputPath": "C:\\repos\\VGLogger\\server\\src\\VGLogger.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Campbell Gilpin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ICE-Enterprise/_packaging/Ovs.Dev.Nuget/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/arrivia/_packaging/arrivia.dev.nuget/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\repos\\VGLogger\\server\\src\\VGLogger.DAL\\VGLogger.DAL.csproj": {
+                "projectPath": "C:\\repos\\VGLogger\\server\\src\\VGLogger.DAL\\VGLogger.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

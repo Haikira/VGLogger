@@ -31,7 +31,7 @@ public class GamesController : ControllerBase
             {
                 Id = 1, 
                 Description = "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
-                Name = "Red Dead Redemption 2"
+                Name = "TESTTSETSETSTTS"
             },
             new GameViewModel
             {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using VGLogger.API.ViewModels;
+using VGLogger.Service.Interfaces;
 
 namespace VGLogger.API.Controllers;
 
@@ -8,10 +9,14 @@ namespace VGLogger.API.Controllers;
 public class PlatformsController : ControllerBase
 {
     private readonly ILogger<DevelopersController> _logger;
+    private readonly IPlatformService _platformService;
 
-    public PlatformsController(ILogger<DevelopersController> logger)
+    public PlatformsController(
+        ILogger<DevelopersController> logger, 
+        IPlatformService platformService)
     {
         _logger = logger;
+        _platformService = platformService;
     }
 
     /// <summary>
@@ -21,8 +26,11 @@ public class PlatformsController : ControllerBase
     /// <returns></returns>
     [HttpGet("{id}")]
     public ActionResult<PlatformViewModel> GetPlatformById(int id)
-    {        
-        return new ActionResult<PlatformViewModel>(new PlatformViewModel());
+    {
+        var platform = _platformService.GetPlatformById(id);
+
+        return Ok(new PlatformViewModel() { Id = platform.Id, Platform = platform.Name });
+        
     }
 
     /// <summary>
@@ -31,7 +39,9 @@ public class PlatformsController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     public ActionResult<IList<PlatformViewModel>> GetPlatforms()
-    {
-        return new ActionResult<IList<PlatformViewModel>>(new List<PlatformViewModel>());
+    {        
+        var platforms = _platformService.GetPlatforms();
+
+        return Ok(platforms.Select(x => new PlatformViewModel { Id = x.Id, Platform = x.Name }).ToList());        
     }
 }
