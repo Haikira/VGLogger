@@ -122,12 +122,48 @@ erDiagram
 **USERS**
 
 GET /users/{id}
+
+Response
+
+[
+    {
+      “id”:"86",
+      “first_name”:"Jack",
+      "last_name":"Burton",
+      "email":"jackburton@gmail.com"
+    }
+]
+
 GET /users
+
+Response 
+
+[
+    {
+      “id”:"86",
+      “first_name”:"Jack",
+      "last_name":"Burton",
+      "email":"jackburton@gmail.com"
+    },
+    {
+      “id”:"82",
+      “first_name”:"John",
+      "last_name":"MacReady",
+      "email":"johmacreadyn@gmail.com"
+    }
+]
+
 GET /users/{id}/games
 POST /users
+
+Request
+
 POST /users/{id}/games
 POST /users/{id}/games/{id}
 PUT /users/{id}
+
+Request
+
 PUT /users/{id}/games/{id}
 DELETE /users/{id}
 DELETE /users/{id}/games/{id}
