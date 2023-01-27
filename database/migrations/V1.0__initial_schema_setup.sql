@@ -47,7 +47,7 @@ CREATE TABLE public.reviews (
 );
 CREATE TABLE public.date_types (
     id SERIAL NOT NULL,
-    date_type VARCHAR(255),
+    type_of_date VARCHAR(255),
     CONSTRAINT completions_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.game_dates (

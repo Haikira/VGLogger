@@ -30,8 +30,8 @@ insert into users_games (user_id, game_platform_id) values ((select id from user
 
 insert into reviews (star_rating, description, date_reviewed, game_id, user_id) values (5, 'Good stuff!', '2023-01-23', (select id from games where name ='God of War Ragnarok'), (select id from users where first_name ='Campbell'));
 
-insert into date_types (date_type) values ('Purchase Date');
-insert into date_types (date_type) values ('Completed Date');
+insert into date_types (type_of_date) values ('Purchase Date');
+insert into date_types (type_of_date) values ('Completed Date');
 
 insert into game_dates (date, date_type_id, user_game_id) values ('2022-12-11', (select id from date_types where date_type ='Purchase Date'), (select id from users_games where user_id = (select id from users where first_name ='Campbell') AND game_platform_id = (select id from games_platforms where game_id = (select id from games where name ='God of War Ragnarok') AND platform_id = (select id from platforms where name ='Playstation 5'))));
 insert into game_dates (date, date_type_id, user_game_id) values ('2023-01-02', (select id from date_types where date_type ='Completed Date'), (select id from users_games where user_id = (select id from users where first_name ='Campbell') AND game_platform_id = (select id from games_platforms where game_id = (select id from games where name ='God of War Ragnarok') AND platform_id = (select id from platforms where name ='Playstation 5'))));

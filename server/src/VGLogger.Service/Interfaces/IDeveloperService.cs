@@ -1,12 +1,12 @@
-﻿using VGLogger.Service.Services.DTOs;
+﻿using VGLogger.Service.DTOs;
 
 namespace VGLogger.Service.Interfaces
 {
     public interface IDeveloperService
     {
-        IList<DeveloperDTO> GetDevelopers();
+        Task<List<DeveloperDTO>> GetDevelopers();
 
-        DeveloperDTO GetDeveloperById(int id);
+        Task<DeveloperDTO> GetDeveloperById(int id);
 
         bool UpdateDeveloper(DeveloperDTO developerDTO);
 

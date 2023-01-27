@@ -1,4 +1,4 @@
-﻿using VGLogger.Service.Services.DTOs;
+﻿using VGLogger.Service.DTOs;
 
 namespace VGLogger.Service.Interfaces
 {

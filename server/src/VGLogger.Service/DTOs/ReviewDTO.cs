@@ -1,4 +1,4 @@
-﻿namespace VGLogger.Service.Services.DTOs
+﻿namespace VGLogger.Service.DTOs
 {
     public class ReviewDTO
     {

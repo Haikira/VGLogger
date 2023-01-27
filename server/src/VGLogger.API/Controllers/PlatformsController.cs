@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VGLogger.API.ViewModels;
 using VGLogger.Service.Interfaces;
+using VGLogger.Service.DTOs;
 
 namespace VGLogger.API.Controllers;
 
@@ -29,8 +30,7 @@ public class PlatformsController : ControllerBase
     {
         var platform = _platformService.GetPlatformById(id);
 
-        return Ok(new PlatformViewModel() { Id = platform.Id, Platform = platform.Name });
-        
+        return Ok(new PlatformViewModel() { Id = platform.Id, Platform = platform.Name });        
     }
 
     /// <summary>

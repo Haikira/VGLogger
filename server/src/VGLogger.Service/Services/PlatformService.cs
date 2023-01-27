@@ -7,7 +7,7 @@ using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
 using VGLogger.DAL.Specifications.Platforms;
 using VGLogger.Service.Interfaces;
-using VGLogger.Service.Services.DTOs;
+using VGLogger.Service.DTOs;
 using Unosquare.EntityFramework.Specification.Common.Extensions;
 
 namespace VGLogger.Service.Services

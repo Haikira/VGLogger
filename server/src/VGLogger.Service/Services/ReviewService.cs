@@ -8,7 +8,7 @@ using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
 using VGLogger.DAL.Specifications.Reviews;
 using VGLogger.Service.Interfaces;
-using VGLogger.Service.Services.DTOs;
+using VGLogger.Service.DTOs;
 
 namespace VGLogger.Service.Services
 {

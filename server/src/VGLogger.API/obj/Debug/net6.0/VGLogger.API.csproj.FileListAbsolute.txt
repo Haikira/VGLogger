@@ -37,6 +37,8 @@ C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\VGLogger.API.deps.jso
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\VGLogger.API.runtimeconfig.json
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\VGLogger.API.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\VGLogger.API.pdb
+C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\AutoMapper.dll
+C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\FluentValidation.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -56,6 +58,8 @@ C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Npgsql.EntityFramewor
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Unosquare.EntityFramework.Specification.Common.dll
+C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\Unosquare.EntityFramework.Specification.EFCore.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\VGLogger.DAL.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\VGLogger.Service.dll
 C:\repos\VGLogger\server\src\VGLogger.API\bin\Debug\net6.0\VGLogger.Service.pdb
