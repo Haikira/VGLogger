@@ -4,9 +4,9 @@ using VGLogger.Service.DTOs;
 
 namespace VGLogger.Service.Profiles
 {
-    public class DeveloperProfile : Profile
+    public class ReviewProfile : Profile
     {
-        public DeveloperProfile()
+        public ReviewProfile()
         {
             ConfigureDomainToDTO();
             ConfigureDTOToDomain();
@@ -14,12 +14,12 @@ namespace VGLogger.Service.Profiles
 
         private void ConfigureDomainToDTO()
         {
-            CreateMap<Developer, DeveloperDTO>();
+            CreateMap<Review, ReviewDTO>();
         }
 
         private void ConfigureDTOToDomain()
         {
-            CreateMap<DeveloperDTO, Developer>();
+            CreateMap<ReviewDTO, Review>();
         }
     }
 }
