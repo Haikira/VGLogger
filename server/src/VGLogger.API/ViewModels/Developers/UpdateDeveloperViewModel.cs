@@ -2,5 +2,6 @@
 {
     public class UpdateDeveloperViewModel
     {
+        public int Id { get; set; }
     }
 }

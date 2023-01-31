@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using VGLogger.DAL.Models;
-using VGLogger.Service.DTOs;
+using VGLogger.Service.Dtos;
 
 namespace VGLogger.Service.Profiles
 {
@@ -8,18 +8,18 @@ namespace VGLogger.Service.Profiles
     {
         public ReviewProfile()
         {
-            ConfigureDomainToDTO();
-            ConfigureDTOToDomain();
+            ConfigureDomainToDto();
+            ConfigureDtoToDomain();
         }
 
-        private void ConfigureDomainToDTO()
+        private void ConfigureDomainToDto()
         {
-            CreateMap<Review, ReviewDTO>();
+            CreateMap<Review, ReviewDto>();
         }
 
-        private void ConfigureDTOToDomain()
+        private void ConfigureDtoToDomain()
         {
-            CreateMap<ReviewDTO, Review>();
+            CreateMap<ReviewDto, Review>();
         }
     }
 }

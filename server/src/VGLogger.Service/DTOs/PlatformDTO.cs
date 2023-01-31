@@ -1,6 +1,6 @@
-﻿namespace VGLogger.Service.DTOs
+﻿namespace VGLogger.Service.Dtos
 {
-    public class PlatformDTO
+    public class PlatformDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

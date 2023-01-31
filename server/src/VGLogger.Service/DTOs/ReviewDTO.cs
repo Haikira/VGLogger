@@ -1,6 +1,6 @@
-﻿namespace VGLogger.Service.DTOs
+﻿namespace VGLogger.Service.Dtos
 {
-    public class ReviewDTO
+    public class ReviewDto
     {
         public int Id { get; set; }
         public int StarRating { get; set; }

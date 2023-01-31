@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using VGLogger.DAL.Models;
-using VGLogger.Service.DTOs;
+using VGLogger.Service.Dtos;
 
 namespace VGLogger.Service.Profiles
 {
@@ -8,18 +8,18 @@ namespace VGLogger.Service.Profiles
     {
         public UserProfile()
         {
-            ConfigureDomainToDTO();
-            ConfigureDTOToDomain();
+            ConfigureDomainToDto();
+            ConfigureDtoToDomain();
         }
 
-        private void ConfigureDomainToDTO()
+        private void ConfigureDomainToDto()
         {
-            CreateMap<User, UserDTO>();
+            CreateMap<User, UserDto>();
         }
 
-        private void ConfigureDTOToDomain()
+        private void ConfigureDtoToDomain()
         {
-            CreateMap<UserDTO, User>();
+            CreateMap<UserDto, User>();
         }
     }
 }

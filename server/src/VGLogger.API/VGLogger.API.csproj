@@ -16,8 +16,4 @@
     <ProjectReference Include="..\VGLogger.Service\VGLogger.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Profiles\" />
-  </ItemGroup>
-
 </Project>

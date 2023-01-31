@@ -1,13 +1,12 @@
-﻿using VGLogger.DAL.Interfaces;
-using VGLogger.DAL.Models;
-using VGLogger.Service.Interfaces;
-using VGLogger.Service.DTOs;
-using Unosquare.EntityFramework.Specification.Common.Extensions;
-using VGLogger.DAL.Specifications.Developers;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Unosquare.EntityFramework.Specification.Common.Extensions;
+using VGLogger.DAL.Interfaces;
+using VGLogger.DAL.Models;
+using VGLogger.DAL.Specifications.Developers;
+using VGLogger.Service.Dtos;
 using VGLogger.Service.Exceptions;
-using System.Runtime.CompilerServices;
-using AutoMapper;
+using VGLogger.Service.Interfaces;
 
 namespace VGLogger.Service.Services
 {
@@ -22,25 +21,23 @@ namespace VGLogger.Service.Services
             _mapper = mapper;
         }
 
-        public bool CreateDeveloper(DeveloperDTO developerDTO)
+        public void CreateDeveloper(DeveloperDto developer)
         {
-            var developerToCreate = _mapper.Map<Developer>(developerDTO);
+            var developerToCreate = _mapper.Map<Developer>(developer);
             _database.Add(developerToCreate);
             _database.SaveChanges();
-            return true;
         }
 
-        public bool DeleteDeveloper(int id)
+        public void DeleteDeveloper(int id)
         {
             var developerToDelete = _database.Get<Developer>().Where(new DeveloperByIdSpec(id));
             _database.Delete(developerToDelete);
             _database.SaveChanges();
-            return true;
         }
 
-        public async Task<DeveloperDTO> GetDeveloperById(int id)
+        public async Task<DeveloperDto> GetDeveloperById(int id)
         {
-            var developer = await _mapper.ProjectTo<DeveloperDTO>(_database
+            var developer = await _mapper.ProjectTo<DeveloperDto>(_database
                 .Get<Developer>()
                 .Where(new DeveloperByIdSpec(id))
                 ).SingleOrDefaultAsync();
@@ -48,17 +45,20 @@ namespace VGLogger.Service.Services
             return developer ?? throw new NotFoundException($"Could not find developer with ID: {id}");
         }
 
-        public Task<List<DeveloperDTO>> GetDevelopers()
+        public Task<List<DeveloperDto>> GetDevelopers()
         {
-            return _mapper.ProjectTo<DeveloperDTO>(_database.Get<Developer>()).ToListAsync();
+            return _mapper.ProjectTo<DeveloperDto>(_database.Get<Developer>()).ToListAsync();
         }
 
-        public bool UpdateDeveloper(DeveloperDTO developerDTO)
+        public void UpdateDeveloper(int id, DeveloperDto developer)
         {
-            var developerToSave = _mapper.Map<Developer>(developerDTO);
-            // Update
+            var existingDeveloper = _database.Get<Developer>().FirstOrDefault(new DeveloperByIdSpec(id));
+
+            if (existingDeveloper == null) throw new NotFoundException($"Could not find developer with id: {id}");
+
+            _mapper.Map(developer, existingDeveloper);
+
             _database.SaveChanges();
-            return true;
         }
     }
 }

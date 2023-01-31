@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VGLogger.API.ViewModels;
 using VGLogger.Service.Interfaces;
-using VGLogger.Service.DTOs;
+using VGLogger.Service.Dtos;
 
 namespace VGLogger.API.Controllers;
 
