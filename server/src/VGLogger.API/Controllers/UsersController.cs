@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using VGLogger.API.ViewModels;
+using VGLogger.Service.Interfaces;
+using VGLogger.Service.Dtos;
+using VGLogger.API.Controllers.Base;
+using AutoMapper;
+using System.Net;
 
 namespace VGLogger.API.Controllers;
 
@@ -8,11 +12,15 @@ namespace VGLogger.API.Controllers;
 [Route("[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly ILogger<DevelopersController> _logger;
+    private readonly IUserService _userService;
+    private readonly ILogger<UsersController> _logger;
+    private readonly IMapper _mapper;
 
-    public UsersController(ILogger<DevelopersController> logger)
+    public UsersController(ILogger<UsersController> logger, IUserService userService, IMapper mapper)
     {
+        _userService = userService;
         _logger = logger;
+        _mapper = mapper;
     }
 
     /// <summary>

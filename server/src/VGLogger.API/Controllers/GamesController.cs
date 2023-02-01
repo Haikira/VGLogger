@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Net;
 using VGLogger.API.ViewModels;
-
+using VGLogger.Service.Interfaces;
+using VGLogger.Service.Dtos;
+using VGLogger.API.Controllers.Base;
+using AutoMapper;
+using System.Net;
 
 namespace VGLogger.API.Controllers;
 
@@ -10,11 +12,15 @@ namespace VGLogger.API.Controllers;
 [Route("[controller]")]
 public class GamesController : ControllerBase
 {
+    private readonly IGameService _gameService;
     private readonly ILogger<GamesController> _logger;
+    private readonly IMapper _mapper;
 
-    public GamesController(ILogger<GamesController> logger)
+    public GamesController(ILogger<GamesController> logger, IGameService gameService, IMapper mapper)
     {
+        _gameService = gameService;
         _logger = logger;
+        _mapper = mapper;
     }
 
     // TODO GET /games/{id}/reviews

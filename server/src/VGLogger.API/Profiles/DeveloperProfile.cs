@@ -8,17 +8,17 @@ namespace VGLogger.API.Profiles
     {
         public DeveloperProfile()
         {
-            ConfigureModelToDto();
-            ConfigureDtoToModel();
+            ConfigureViewModelToDto();
+            ConfigureDtoToViewModel();
         }
 
-        private void ConfigureModelToDto()
+        private void ConfigureViewModelToDto()
         {
             CreateMap<UpdateDeveloperViewModel, DeveloperDto>();
             CreateMap<CreateDeveloperViewModel, DeveloperDto>();
         }
 
-        private void ConfigureDtoToModel()
+        private void ConfigureDtoToViewModel()
         {
             CreateMap<DeveloperDto, DeveloperViewModel>();
         }

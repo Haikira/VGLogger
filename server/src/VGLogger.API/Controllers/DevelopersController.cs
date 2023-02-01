@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using VGLogger.API.ViewModels;
-using VGLogger.DAL.Interfaces;
 using VGLogger.Service.Interfaces;
 using VGLogger.Service.Dtos;
 using VGLogger.API.Controllers.Base;
-using Microsoft.Extensions.Logging;
-using VGLogger.Service.Services;
 using AutoMapper;
 using System.Net;
 
@@ -26,68 +23,43 @@ public class DevelopersController : VGLoggerBaseController
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IList<DeveloperViewModel>>> GetDevelopers()
     {
         var developers = await _developerService.GetDevelopers();        
 
-        return OkOrNoContent(developers.Select(x => new DeveloperViewModel { Id = x.Id, Name = x.Name }).ToList());
+        return OkOrNoContent(_mapper.Map<List<DeveloperViewModel>>(developers));
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     [HttpGet("{id}")]
-    public async Task<ActionResult<DeveloperDto>> GetDeveloperById(int id)
+    public async Task<ActionResult<DeveloperViewModel>> GetDeveloperById(int id)
     {
         var developer = await _developerService.GetDeveloperById(id);
 
-        return Ok(developer);
+        return Ok(_mapper.Map<DeveloperViewModel>(developer));
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="createDeveloperViewModel"></param>
-    /// <returns></returns>
     [HttpPost]
-    public ActionResult CreateDeveloper([FromBody] CreateDeveloperViewModel createDeveloperViewModel)
+    public async Task<IActionResult> CreateDeveloper([FromBody] CreateDeveloperViewModel createDeveloperViewModel)
     {
-        _developerService.CreateDeveloper(_mapper.Map<DeveloperDto>(createDeveloperViewModel));
+        await _developerService.CreateDeveloper(_mapper.Map<DeveloperDto>(createDeveloperViewModel));        
 
         return StatusCode((int)HttpStatusCode.Created);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="updateDeveloperViewModel"></param>
-    /// <returns></returns>
     [HttpPut("{id}")]
-    public ActionResult UpdateDeveloper(int id, [FromBody] UpdateDeveloperViewModel updateDeveloperViewModel)
+    public async Task<IActionResult> UpdateDeveloper(int id, [FromBody] UpdateDeveloperViewModel updateDeveloperViewModel)
     {
-        _developerService.UpdateDeveloper(id, _mapper.Map<DeveloperDto>(updateDeveloperViewModel));
+        await _developerService.UpdateDeveloper(id, _mapper.Map<DeveloperDto>(updateDeveloperViewModel));
 
         return NoContent();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     [HttpDelete("{id}")]
-    public ActionResult DeleteDeveloper(int id)
+    public async Task<IActionResult> DeleteDeveloper(int id)
     {
-        _developerService.DeleteDeveloper(id);
+        await _developerService.DeleteDeveloper(id);
 
-        return Ok();
+        return NoContent();
     }
 }

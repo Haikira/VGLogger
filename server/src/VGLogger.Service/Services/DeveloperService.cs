@@ -21,18 +21,21 @@ namespace VGLogger.Service.Services
             _mapper = mapper;
         }
 
-        public void CreateDeveloper(DeveloperDto developer)
+        public async Task CreateDeveloper(DeveloperDto developer)
         {
             var developerToCreate = _mapper.Map<Developer>(developer);
-            _database.Add(developerToCreate);
-            _database.SaveChanges();
+            _database.AddAsync(developerToCreate);
+            await _database.SaveChangesAsync();
         }
 
-        public void DeleteDeveloper(int id)
+        public async Task DeleteDeveloper(int id)
         {
-            var developerToDelete = _database.Get<Developer>().Where(new DeveloperByIdSpec(id));
+            var developerToDelete = await _database.Get<Developer>().Where(new DeveloperByIdSpec(id)).SingleOrDefaultAsync();
+
+            if (developerToDelete == null) throw new NotFoundException($"Could not find developer with id: {id}");
+
             _database.Delete(developerToDelete);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
         }
 
         public async Task<DeveloperDto> GetDeveloperById(int id)
@@ -50,15 +53,15 @@ namespace VGLogger.Service.Services
             return _mapper.ProjectTo<DeveloperDto>(_database.Get<Developer>()).ToListAsync();
         }
 
-        public void UpdateDeveloper(int id, DeveloperDto developer)
+        public async Task UpdateDeveloper(int id, DeveloperDto developer)
         {
-            var existingDeveloper = _database.Get<Developer>().FirstOrDefault(new DeveloperByIdSpec(id));
+            var existingDeveloper = await _database.Get<Developer>().Where(new DeveloperByIdSpec(id)).FirstOrDefaultAsync();
 
             if (existingDeveloper == null) throw new NotFoundException($"Could not find developer with id: {id}");
 
             _mapper.Map(developer, existingDeveloper);
 
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
         }
     }
 }

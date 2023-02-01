@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using VGLogger.API.ViewModels;
 using VGLogger.Service.Interfaces;
 using VGLogger.Service.Dtos;
+using VGLogger.API.Controllers.Base;
+using AutoMapper;
+using System.Net;
 
 namespace VGLogger.API.Controllers;
 
@@ -9,15 +12,15 @@ namespace VGLogger.API.Controllers;
 [Route("[controller]")]
 public class PlatformsController : ControllerBase
 {
-    private readonly ILogger<DevelopersController> _logger;
     private readonly IPlatformService _platformService;
+    private readonly ILogger<PlatformsController> _logger;
+    private readonly IMapper _mapper;
 
-    public PlatformsController(
-        ILogger<DevelopersController> logger, 
-        IPlatformService platformService)
+    public PlatformsController(ILogger<PlatformsController> logger, IPlatformService platformService, IMapper mapper)
     {
-        _logger = logger;
         _platformService = platformService;
+        _logger = logger;
+        _mapper = mapper;
     }
 
     /// <summary>
@@ -30,7 +33,7 @@ public class PlatformsController : ControllerBase
     {
         var platform = _platformService.GetPlatformById(id);
 
-        return Ok(new PlatformViewModel() { Id = platform.Id, Platform = platform.Name });        
+        return Ok();        
     }
 
     /// <summary>
@@ -42,6 +45,6 @@ public class PlatformsController : ControllerBase
     {        
         var platforms = _platformService.GetPlatforms();
 
-        return Ok(platforms.Select(x => new PlatformViewModel { Id = x.Id, Platform = x.Name }).ToList());        
+        return Ok();        
     }
 }

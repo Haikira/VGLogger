@@ -6,8 +6,8 @@ namespace VGLogger.Service.Interfaces
     {
         Task<List<DeveloperDto>> GetDevelopers();
         Task<DeveloperDto> GetDeveloperById(int id);
-        void CreateDeveloper(DeveloperDto developerDto);
-        void DeleteDeveloper(int id);                
-        void UpdateDeveloper(int id, DeveloperDto developerDto);
+        Task CreateDeveloper(DeveloperDto developerDto);
+        Task DeleteDeveloper(int id);
+        Task UpdateDeveloper(int id, DeveloperDto developerDto);
     }
 }

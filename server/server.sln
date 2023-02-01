@@ -5,19 +5,20 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0FB22BB5-3843-4253-BF11-BF16576ACE96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VGLogger.API", "src\VGLogger.API\VGLogger.API.csproj", "{BB8A547C-487C-45E0-B65F-69911CB9D575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VGLogger.API", "src\VGLogger.API\VGLogger.API.csproj", "{BB8A547C-487C-45E0-B65F-69911CB9D575}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VGLogger.Service", "src\VGLogger.Service\VGLogger.Service.csproj", "{6CDD9DC3-AC9A-4ED6-AEE7-5A972F8BB559}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VGLogger.Service", "src\VGLogger.Service\VGLogger.Service.csproj", "{6CDD9DC3-AC9A-4ED6-AEE7-5A972F8BB559}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VGLogger.DAL", "src\VGLogger.DAL\VGLogger.DAL.csproj", "{42DC491B-FBBB-45E3-B42A-5C25AFD3F0CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VGLogger.DAL", "src\VGLogger.DAL\VGLogger.DAL.csproj", "{42DC491B-FBBB-45E3-B42A-5C25AFD3F0CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{705E37B3-267B-464F-A2F2-313830E515AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VGLogger.API.Test", "test\VGLogger.API.Test\VGLogger.API.Test.csproj", "{6F4B1777-34EE-483C-B873-2BA7328984C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BB8A547C-487C-45E0-B65F-69911CB9D575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -32,10 +33,21 @@ Global
 		{42DC491B-FBBB-45E3-B42A-5C25AFD3F0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42DC491B-FBBB-45E3-B42A-5C25AFD3F0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42DC491B-FBBB-45E3-B42A-5C25AFD3F0CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4B1777-34EE-483C-B873-2BA7328984C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4B1777-34EE-483C-B873-2BA7328984C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4B1777-34EE-483C-B873-2BA7328984C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4B1777-34EE-483C-B873-2BA7328984C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BB8A547C-487C-45E0-B65F-69911CB9D575} = {0FB22BB5-3843-4253-BF11-BF16576ACE96}
 		{6CDD9DC3-AC9A-4ED6-AEE7-5A972F8BB559} = {0FB22BB5-3843-4253-BF11-BF16576ACE96}
 		{42DC491B-FBBB-45E3-B42A-5C25AFD3F0CD} = {0FB22BB5-3843-4253-BF11-BF16576ACE96}
+		{6F4B1777-34EE-483C-B873-2BA7328984C8} = {705E37B3-267B-464F-A2F2-313830E515AF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43781F34-BED8-491F-9358-5F155DD30A0D}
 	EndGlobalSection
 EndGlobal
