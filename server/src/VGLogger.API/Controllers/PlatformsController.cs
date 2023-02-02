@@ -10,11 +10,11 @@ namespace VGLogger.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PlatformsController : ControllerBase
+public class PlatformsController : VGLoggerBaseController
 {
-    private readonly IPlatformService _platformService;
     private readonly ILogger<PlatformsController> _logger;
     private readonly IMapper _mapper;
+    private readonly IPlatformService _platformService;
 
     public PlatformsController(ILogger<PlatformsController> logger, IPlatformService platformService, IMapper mapper)
     {
@@ -23,28 +23,43 @@ public class PlatformsController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [HttpGet("{id}")]
-    public ActionResult<PlatformViewModel> GetPlatformById(int id)
+    [HttpPost]
+    public async Task<IActionResult> CreatePlatform([FromBody] CreatePlatformViewModel createPlatformViewModel)
     {
-        var platform = _platformService.GetPlatformById(id);
+        await _platformService.CreatePlatform(_mapper.Map<PlatformDto>(createPlatformViewModel));
 
-        return Ok();        
+        return StatusCode((int)HttpStatusCode.Created);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    public ActionResult<IList<PlatformViewModel>> GetPlatforms()
-    {        
-        var platforms = _platformService.GetPlatforms();
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePlatform(int id)
+    {
+        await _platformService.DeletePlatform(id);
 
-        return Ok();        
+        return NoContent();
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<PlatformViewModel>> GetPlatformById(int id)
+    {
+        var platform = await _platformService.GetPlatformById(id);
+
+        return Ok(_mapper.Map<PlatformViewModel>(platform));        
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IList<PlatformViewModel>>> GetPlatforms()
+    {        
+        var platforms = await _platformService.GetPlatforms();
+
+        return OkOrNoContent(_mapper.Map<List<PlatformViewModel>>(platforms));        
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdatePlatform(int id, [FromBody] UpdatePlatformViewModel updatePlatformViewModel)
+    {
+        await _platformService.UpdatePlatform(id, _mapper.Map<PlatformDto>(updatePlatformViewModel));
+
+        return NoContent();
     }
 }

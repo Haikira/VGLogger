@@ -11,8 +11,8 @@ namespace VGLogger.Service.Interfaces
     {
         Task<List<PlatformDto>> GetPlatforms();
         Task<PlatformDto> GetPlatformById(int id);
-        void CreatePlatform(PlatformDto platform);
-        void DeletePlatform(int id);
-        void UpdatePlatform(int id, PlatformDto platform);
+        Task CreatePlatform(PlatformDto platform);
+        Task DeletePlatform(int id);
+        Task UpdatePlatform(int id, PlatformDto platform);
     }
 }

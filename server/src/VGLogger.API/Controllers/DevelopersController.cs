@@ -23,12 +23,20 @@ public class DevelopersController : VGLoggerBaseController
         _mapper = mapper;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IList<DeveloperViewModel>>> GetDevelopers()
+    [HttpPost]
+    public async Task<IActionResult> CreateDeveloper([FromBody] CreateDeveloperViewModel createDeveloperViewModel)
     {
-        var developers = await _developerService.GetDevelopers();        
+        await _developerService.CreateDeveloper(_mapper.Map<DeveloperDto>(createDeveloperViewModel));
 
-        return OkOrNoContent(_mapper.Map<List<DeveloperViewModel>>(developers));
+        return StatusCode((int)HttpStatusCode.Created);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteDeveloper(int id)
+    {
+        await _developerService.DeleteDeveloper(id);
+
+        return NoContent();
     }
 
     [HttpGet("{id}")]
@@ -39,26 +47,18 @@ public class DevelopersController : VGLoggerBaseController
         return Ok(_mapper.Map<DeveloperViewModel>(developer));
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateDeveloper([FromBody] CreateDeveloperViewModel createDeveloperViewModel)
+    [HttpGet]
+    public async Task<ActionResult<IList<DeveloperViewModel>>> GetDevelopers()
     {
-        await _developerService.CreateDeveloper(_mapper.Map<DeveloperDto>(createDeveloperViewModel));        
+        var developers = await _developerService.GetDevelopers();        
 
-        return StatusCode((int)HttpStatusCode.Created);
+        return OkOrNoContent(_mapper.Map<List<DeveloperViewModel>>(developers));
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateDeveloper(int id, [FromBody] UpdateDeveloperViewModel updateDeveloperViewModel)
     {
         await _developerService.UpdateDeveloper(id, _mapper.Map<DeveloperDto>(updateDeveloperViewModel));
-
-        return NoContent();
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteDeveloper(int id)
-    {
-        await _developerService.DeleteDeveloper(id);
 
         return NoContent();
     }

@@ -10,7 +10,7 @@ namespace VGLogger.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsersController : ControllerBase
+public class UsersController : VGLoggerBaseController
 {
     private readonly IUserService _userService;
     private readonly ILogger<UsersController> _logger;
@@ -23,44 +23,24 @@ public class UsersController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     [HttpGet]
     public ActionResult<IList<UserViewModel>> GetUsers()
     {        
         return new ActionResult<IList<UserViewModel>>(new List<UserViewModel>());
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     [HttpGet("{id}")]
     public ActionResult<UserViewModel> GetUserById(int id)
     {       
         return new ActionResult<UserViewModel>(new UserViewModel());
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="createUserViewModel"></param>
-    /// <returns></returns>
     [HttpPost]
     public ActionResult CreateUser([FromBody] CreateUserViewModel createUserViewModel)
     {
         return StatusCode((int)HttpStatusCode.Created);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="updateUserViewModel"></param>
-    /// <returns></returns>
     [HttpPut("{id}")]
     public ActionResult UpdateUser(int id, [FromBody] UpdateUserViewModel updateUserViewModel)
     {

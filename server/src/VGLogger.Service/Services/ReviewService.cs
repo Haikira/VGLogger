@@ -1,12 +1,13 @@
-﻿using Unosquare.EntityFramework.Specification.Common.Extensions;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Unosquare.EntityFramework.Specification.Common.Extensions;
+using Unosquare.EntityFramework.Specification.EFCore.Extensions;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
 using VGLogger.DAL.Specifications.Reviews;
-using VGLogger.Service.Interfaces;
 using VGLogger.Service.Dtos;
-using AutoMapper;
 using VGLogger.Service.Exceptions;
-using Microsoft.EntityFrameworkCore;
+using VGLogger.Service.Interfaces;
 
 namespace VGLogger.Service.Services
 {
@@ -21,14 +22,21 @@ namespace VGLogger.Service.Services
             _mapper = mapper;
         }
 
-        public void CreateReview(ReviewDto review)
+        public async Task CreateReview(ReviewDto review)
         {
-            throw new NotImplementedException();
+            var reviewToCreate = _mapper.Map<ReviewDto>(review);
+            _database.AddAsync(reviewToCreate);
+            await _database.SaveChangesAsync();
         }
 
-        public void DeleteReview(int id)
+        public async Task DeleteReview(int id)
         {
-            throw new NotImplementedException();
+            var reviewToDelete = await _database.Get<Review>().Where(new ReviewByIdSpec(id)).SingleOrDefaultAsync();
+
+            if (reviewToDelete == null) throw new NotFoundException($"Could not find review with id: {id}");
+
+            _database.Delete(reviewToDelete);
+            await _database.SaveChangesAsync();
         }
 
         public async Task<ReviewDto> GetReviewById(int id)
@@ -46,15 +54,15 @@ namespace VGLogger.Service.Services
             return _mapper.ProjectTo<ReviewDto>(_database.Get<Review>()).ToListAsync();
         }
 
-        public void UpdateReview(int id, ReviewDto review)
+        public async Task UpdateReview(int id, ReviewDto review)
         {
-            var existingReview = _database.Get<Review>().FirstOrDefault(new ReviewByIdSpec(id));
+            var existingReview = await _database.Get<Review>().FirstOrDefaultAsync(new ReviewByIdSpec(id));
 
             if (existingReview == null) throw new NotFoundException($"Could not find review with ID: {id}");
 
             _mapper.Map(review, existingReview);
 
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
         }
     }
 }

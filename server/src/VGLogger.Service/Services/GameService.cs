@@ -25,14 +25,14 @@ namespace VGLogger.Service.Services
             _database = database;
             _mapper = mapper;
         }
-        public void CreateGame(GameDto game)
+        public async Task CreateGame(GameDto game)
         {
             var newGame = _mapper.Map<Game>(game);
             _database.Add(newGame);
             _database.SaveChanges();
         }
 
-        public void DeleteGame(int id)
+        public async Task DeleteGame(int id)
         {
             var gameToDelete = _database.Get<Game>().Where(new GameByIdSpec(id));
             _database.Delete(gameToDelete);
@@ -49,7 +49,7 @@ namespace VGLogger.Service.Services
             return _mapper.ProjectTo<GameDto>(_database.Get<Game>()).ToListAsync();
         }
 
-        public void UpdateGame(int id, GameDto game)
+        public async Task UpdateGame(int id, GameDto game)
         {
             throw new NotImplementedException();
         }

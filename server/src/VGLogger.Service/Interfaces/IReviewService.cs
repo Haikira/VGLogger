@@ -6,8 +6,8 @@ namespace VGLogger.Service.Interfaces
     {
         Task<List<ReviewDto>> GetReviews();
         Task<ReviewDto> GetReviewById(int id);
-        void CreateReview(ReviewDto review);
-        void DeleteReview(int id);
-        void UpdateReview(int id, ReviewDto review);
+        Task CreateReview(ReviewDto review);
+        Task DeleteReview(int id);
+        Task UpdateReview(int id, ReviewDto review);
     }
 }

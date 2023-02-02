@@ -6,8 +6,8 @@ namespace VGLogger.Service.Interfaces
     {
         Task<List<GameDto>> GetGames();
         Task<GameDto> GetGameById(int id);
-        void CreateGame(GameDto game);
-        void DeleteGame(int id);
-        void UpdateGame(int id, GameDto game);
+        Task CreateGame(GameDto game);
+        Task DeleteGame(int id);
+        Task UpdateGame(int id, GameDto game);
     }
 }

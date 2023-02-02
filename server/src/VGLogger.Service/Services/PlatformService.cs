@@ -21,9 +21,21 @@ namespace VGLogger.Service.Services
             _mapper = mapper;
         }
 
-        public Task<List<PlatformDto>> GetPlatforms()
+        public async Task CreatePlatform(PlatformDto platform)
         {
-            return _mapper.ProjectTo<PlatformDto>(_database.Get<Platform>()).ToListAsync();
+            var platformToCreate = _mapper.Map<Platform>(platform);
+            _database.AddAsync(platformToCreate);
+            await _database.SaveChangesAsync();
+        }
+
+        public async Task DeletePlatform(int id)
+        {
+            var platformToDelete = _database.Get<Platform>().Where(new PlatformByIdSpec(id));
+
+            if (platformToDelete == null) throw new NotFoundException($"Could not find platform with id: {id}");
+
+            _database.Delete(platformToDelete);
+            await _database.SaveChangesAsync();
         }
 
         public async Task<PlatformDto> GetPlatformById(int id)
@@ -35,28 +47,19 @@ namespace VGLogger.Service.Services
             return platform ?? throw new NotFoundException($"Could not find platform with ID: {id}");
         }
 
-        public void CreatePlatform(PlatformDto platform)
+        public Task<List<PlatformDto>> GetPlatforms()
         {
-            var platformToCreate = _mapper.Map<Platform>(platform);
-            _database.Add(platformToCreate);
-            _database.SaveChanges();
+            return _mapper.ProjectTo<PlatformDto>(_database.Get<Platform>()).ToListAsync();
         }
-
-        public void DeletePlatform(int id)
+        public async Task UpdatePlatform(int id, PlatformDto platform)
         {
-            var platformToDelete = _database.Get<Platform>().Where(new PlatformByIdSpec(id));
-            _database.Delete(platformToDelete);
-            _database.SaveChanges();
-        }
-
-        public void UpdatePlatform(int id, PlatformDto platform)
-        {
-            var existingPlatform = _database.Get<Platform>().FirstOrDefault(new PlatformByIdSpec(id));
+            var existingPlatform = await _database.Get<Platform>().Where(new PlatformByIdSpec(id)).FirstOrDefaultAsync();
 
             if (existingPlatform == null) throw new NotFoundException($"Could not find platform with ID: {id}");
 
             _mapper.Map(platform, existingPlatform);
-            _database.SaveChanges();
+
+            await _database.SaveChangesAsync();
         }
     }
 }

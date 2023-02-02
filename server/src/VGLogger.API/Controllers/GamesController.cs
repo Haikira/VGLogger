@@ -10,7 +10,7 @@ namespace VGLogger.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class GamesController : ControllerBase
+public class GamesController : VGLoggerBaseController
 {
     private readonly IGameService _gameService;
     private readonly ILogger<GamesController> _logger;
@@ -23,103 +23,43 @@ public class GamesController : ControllerBase
         _mapper = mapper;
     }
 
-    // TODO GET /games/{id}/reviews
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    public ActionResult<IList<GameViewModel>> GetGames()
-    {
-        var ret = new List<GameViewModel> 
-        { 
-            new GameViewModel
-            {
-                Id = 1, 
-                Description = "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
-                Name = "TESTTSETSETSTTS"
-            },
-            new GameViewModel
-            {
-                Id = 2,
-                Description = "NieR Automata tells the story of androids 2B, 9S and A2 and their battle to reclaim the machine-driven dystopia overrun by powerful machines.",
-                Name = "NieR:Automata"
-            }
-        };
-
-        return new ActionResult<IList<GameViewModel>>(ret);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [HttpGet("{id}")]
-    public ActionResult<GameDetailViewModel> GetGameById(int id)
-    {
-        var ret = new GameDetailViewModel
-        {
-            Id = id,
-            Description = "Red Dead Redemption 2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
-            Developer = new DeveloperViewModel
-            {
-                Id = 1,
-                Name = "Rockstar Games"
-            },
-            Name = "Red Dead Redemption 2",
-            Platforms = new List<PlatformViewModel>()
-            {
-                new PlatformViewModel
-                {
-                    Id = 1,
-                    Platform = "Playstation 4",
-                    ReleaseDate = new DateTime(2018, 10, 26)
-                },
-                new PlatformViewModel
-                {
-                    Id = 1,
-                    Platform = "Windows",
-                    ReleaseDate = new DateTime(2019, 11, 19)
-                }
-            }
-        };
-
-        return new ActionResult<GameDetailViewModel>(ret);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="createGameViewModel"></param>
-    /// <returns></returns>
     [HttpPost]
-    public ActionResult CreateGame([FromBody] CreateGameViewModel createGameViewModel)
+    public async Task<IActionResult> CreateGame([FromBody] CreateGameViewModel createGameViewModel)
     {
+        await _gameService.CreateGame(_mapper.Map<GameDto>(createGameViewModel));
+
         return StatusCode((int)HttpStatusCode.Created);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="updateGameViewModel"></param>
-    /// <returns></returns>
-    [HttpPut("{id}")]
-    public ActionResult UpdateGame(int id, [FromBody] UpdateGameViewModel updateGameViewModel)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteGame(int id)
     {
-        return Ok();
+        await _gameService.DeleteGame(id);
+
+        return NoContent();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [HttpDelete("{id}")]
-    public ActionResult DeleteGame(int id)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<GameDetailViewModel>> GetGameById(int id)
     {
-        return Ok();
+        var game = await _gameService.GetGameById(id);
+
+        return Ok(_mapper.Map<GameDetailViewModel>(game));
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IList<GameViewModel>>> GetGames()
+    {
+        var games = await _gameService.GetGames();
+
+        return OkOrNoContent(_mapper.Map<List<GameViewModel>>(games));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateGame(int id, [FromBody] UpdateGameViewModel updateGameViewModel)
+    {
+        await _gameService.UpdateGame(id, _mapper.Map<GameDto>(updateGameViewModel));
+
+        return NoContent();
     }
 }
