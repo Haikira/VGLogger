@@ -6,6 +6,7 @@ using VGLogger.API.Controllers.Base;
 using AutoMapper;
 using System.Net;
 using VGLogger.Service.Services;
+using VGLogger.API.ViewModels.Reviews;
 
 namespace VGLogger.API.Controllers;
 
@@ -13,15 +14,31 @@ namespace VGLogger.API.Controllers;
 [Route("[controller]")]
 public class ReviewsController : VGLoggerBaseController
 {
-    private readonly IReviewService _reviewService;
     private readonly ILogger<ReviewsController> _logger;
     private readonly IMapper _mapper;
+    private readonly IReviewService _reviewService;
 
     public ReviewsController(ILogger<ReviewsController> logger, IReviewService reviewService, IMapper mapper)
     {
         _reviewService = reviewService;
         _logger = logger;
         _mapper = mapper;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateReview([FromBody] CreateReviewViewModel createReviewViewModel)
+    {
+        await _reviewService.CreateReview(_mapper.Map<ReviewDto>(createReviewViewModel));
+
+        return StatusCode((int)HttpStatusCode.Created);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteReview(int id)
+    {
+        await _reviewService.DeleteReview(id);
+
+        return NoContent();
     }
 
     [HttpGet("{id}")]
@@ -40,27 +57,11 @@ public class ReviewsController : VGLoggerBaseController
         return OkOrNoContent(_mapper.Map<IList<ReviewViewModel>>(review));
     }
 
-    //[HttpPost]
-    //public async Task<IActionResult> CreateDeveloper([FromBody] CreateDeveloperViewModel createDeveloperViewModel)
-    //{
-    //    await _reviewService.CreateDeveloper(_mapper.Map<DeveloperDto>(createDeveloperViewModel));
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateReview(int id, [FromBody] UpdateReviewViewModel updateReviewViewModel)
+    {
+        await _reviewService.UpdateReview(id, _mapper.Map<ReviewDto>(updateReviewViewModel));
 
-    //    return StatusCode((int)HttpStatusCode.Created);
-    //}
-
-    //[HttpPut("{id}")]
-    //public async Task<IActionResult> UpdateDeveloper(int id, [FromBody] UpdateDeveloperViewModel updateDeveloperViewModel)
-    //{
-    //    await _reviewService.UpdateDeveloper(id, _mapper.Map<DeveloperDto>(updateDeveloperViewModel));
-
-    //    return NoContent();
-    //}
-
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteDeveloper(int id)
-    //{
-    //    await _reviewService.DeleteReview(id);
-
-    //    return NoContent();
-    //}
+        return NoContent();
+    }
 }

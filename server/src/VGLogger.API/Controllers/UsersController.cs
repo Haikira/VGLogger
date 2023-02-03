@@ -12,9 +12,9 @@ namespace VGLogger.API.Controllers;
 [Route("[controller]")]
 public class UsersController : VGLoggerBaseController
 {
-    private readonly IUserService _userService;
     private readonly ILogger<UsersController> _logger;
     private readonly IMapper _mapper;
+    private readonly IUserService _userService;
 
     public UsersController(ILogger<UsersController> logger, IUserService userService, IMapper mapper)
     {
@@ -23,39 +23,42 @@ public class UsersController : VGLoggerBaseController
         _mapper = mapper;
     }
 
-    [HttpGet]
-    public ActionResult<IList<UserViewModel>> GetUsers()
-    {        
-        return new ActionResult<IList<UserViewModel>>(new List<UserViewModel>());
-    }
-
-    [HttpGet("{id}")]
-    public ActionResult<UserViewModel> GetUserById(int id)
-    {       
-        return new ActionResult<UserViewModel>(new UserViewModel());
-    }
-
     [HttpPost]
-    public ActionResult CreateUser([FromBody] CreateUserViewModel createUserViewModel)
+    public async Task<ActionResult> CreateUser([FromBody] CreateUserViewModel createUserViewModel)
     {
+        await _userService.CreateUser(_mapper.Map<UserDto>(createUserViewModel));
+
         return StatusCode((int)HttpStatusCode.Created);
     }
 
-    [HttpPut("{id}")]
-    public ActionResult UpdateUser(int id, [FromBody] UpdateUserViewModel updateUserViewModel)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
     {
-        return Ok();
+        await _userService.DeleteUser(id);
+
+        return NoContent();
     }
 
-    // TODO - GET /users/{id}/games
+    [HttpGet("{id}")]
+    public async Task<ActionResult<UserViewModel>> GetUserById(int id)
+    {
+        var user = await _userService.GetUserById(id);
 
-    // TODO - POST /users/{id}/games
+        return Ok(_mapper.Map<UserViewModel>(user));
+    }
 
-    // POST /users/{id}/games/{id}
+    [HttpGet]
+    public async Task<ActionResult<IList<UserViewModel>>> GetUsers()
+    {
+        var users = await _userService.GetUsers();
 
-    // PUT /users/{id}/games/{id}
+        return OkOrNoContent(_mapper.Map<List<UserViewModel>>(users));
+    }
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateUser(int id, [FromBody] UpdateUserViewModel updateUserViewModel)
+    {
+        await _userService.UpdateUser(id, _mapper.Map<UserDto>(updateUserViewModel));
 
-    // DELETE /users/{id}
-
-    // DELETE /users/{id}/games/{id}
+        return NoContent();
+    }
 }
