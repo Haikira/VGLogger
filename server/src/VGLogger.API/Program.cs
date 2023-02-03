@@ -17,7 +17,10 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddScoped<IVGLoggerDatabase, VGLoggerContext>(_ => new VGLoggerContext("Server=localhost,5432;Database=vglogger;User Id=admin;Password=password;"))
     .AddScoped<IDeveloperService, DeveloperService>()
-    .AddScoped<IPlatformService, PlatformService>();
+    .AddScoped<IGameService, GameService>()
+    .AddScoped<IPlatformService, PlatformService>()
+    .AddScoped<IReviewService, ReviewService>()
+    .AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
