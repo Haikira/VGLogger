@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
+using Unosquare.EntityFramework.Specification.Common.Extensions;
+using Unosquare.EntityFramework.Specification.EFCore.Extensions;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
-using VGLogger.Service.Dtos;
-using VGLogger.Service.Interfaces;
-using VGLogger.DAL.Specifications.Users;
 using VGLogger.DAL.Specifications.Games;
-using Unosquare.EntityFramework.Specification.Common.Extensions;
+using VGLogger.Service.Dtos;
+using VGLogger.Service.Exceptions;
+using VGLogger.Service.Interfaces;
 
 namespace VGLogger.Service.Services
 {
@@ -27,21 +23,29 @@ namespace VGLogger.Service.Services
         }
         public async Task CreateGame(GameDto game)
         {
-            var newGame = _mapper.Map<Game>(game);
-            _database.Add(newGame);
-            _database.SaveChanges();
+            var gameToCreate = _mapper.Map<Game>(game);
+            _database.AddAsync(gameToCreate);
+            await _database.SaveChangesAsync();
         }
 
         public async Task DeleteGame(int id)
         {
-            var gameToDelete = _database.Get<Game>().Where(new GameByIdSpec(id));
+            var gameToDelete = await _database.Get<Game>().FirstOrDefaultAsync(new GameByIdSpec(id));
+
+            if (gameToDelete == null) throw new NotFoundException($"Could not find game with id: {id}");
+
             _database.Delete(gameToDelete);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
         }
 
-        public Task<GameDto> GetGameById(int id)
+        public async Task<GameDto> GetGameById(int id)
         {
-            throw new NotImplementedException();
+            var game = await _mapper.ProjectTo<GameDto>(_database
+                .Get<Game>()
+                .Where(new GameByIdSpec(id))
+                ).SingleOrDefaultAsync();
+
+            return game ?? throw new NotFoundException($"Could not find game with ID: {id}");
         }
 
         public Task<List<GameDto>> GetGames()
@@ -51,7 +55,13 @@ namespace VGLogger.Service.Services
 
         public async Task UpdateGame(int id, GameDto game)
         {
-            throw new NotImplementedException();
+            var existingGame = await _database.Get<Game>().FirstOrDefaultAsync(new GameByIdSpec(id));
+
+            if (existingGame == null) throw new NotFoundException($"Could not find game with ID: {id}");
+
+            _mapper.Map(game, existingGame);
+
+            await _database.SaveChangesAsync();
         }
     }
 }

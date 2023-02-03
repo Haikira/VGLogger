@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Unosquare.EntityFramework.Specification.Common.Extensions;
+using Unosquare.EntityFramework.Specification.EFCore.Extensions;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
-using VGLogger.DAL.Specifications.Platforms;
 using VGLogger.DAL.Specifications.Users;
 using VGLogger.Service.Dtos;
 using VGLogger.Service.Exceptions;
@@ -22,23 +22,31 @@ namespace VGLogger.Service.Services
             _mapper = mapper;
         }
 
-        public void CreateUser(UserDto user)
+        public async Task CreateUser(UserDto user)
         {
             var newUser = _mapper.Map<User>(user);
-            _database.Add(newUser);
-            _database.SaveChanges();
+            _database.AddAsync(newUser);
+            await _database.SaveChangesAsync();
         }
 
-        public void DeleteUser(int id)
+        public async Task DeleteUser(int id)
         {
-            var userToDelete = _database.Get<User>().Where(new UserByIdSpec(id));
+            var userToDelete = await _database.Get<User>().Where(new UserByIdSpec(id)).FirstOrDefaultAsync();
+
+            if (userToDelete == null) throw new NotFoundException($"Could not find user with id: {id}");
+
             _database.Delete(userToDelete);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
         }
 
-        public Task<UserDto> GetUserById(int id)
+        public async Task<UserDto> GetUserById(int id)
         {
-            throw new NotImplementedException();
+            var user = await _mapper.ProjectTo<UserDto>(_database
+                .Get<User>()
+                .Where(new UserByIdSpec(id))
+                ).SingleOrDefaultAsync();
+
+            return user ?? throw new NotFoundException($"Could not find user with ID: {id}");
         }
 
         public Task<List<UserDto>> GetUsers()
@@ -46,14 +54,14 @@ namespace VGLogger.Service.Services
             return _mapper.ProjectTo<UserDto>(_database.Get<User>()).ToListAsync();
         }
 
-        public void UpdateUser(int id, UserDto user)
+        public async Task UpdateUser(int id, UserDto user)
         {
-            var existingUser = _database.Get<User>().FirstOrDefault(new UserByIdSpec(id));
+            var existingUser = await _database.Get<User>().FirstOrDefaultAsync(new UserByIdSpec(id));
 
             if (existingUser == null) throw new NotFoundException($"Could not find user with ID: {id}");
 
             _mapper.Map(user, existingUser);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
         }
     }
 }

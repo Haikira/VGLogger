@@ -6,8 +6,8 @@ namespace VGLogger.Service.Interfaces
     {
         Task<List<UserDto>> GetUsers();
         Task<UserDto> GetUserById(int id);
-        void CreateUser(UserDto user);
-        void DeleteUser(int id);
-        void UpdateUser(int id, UserDto user);
+        Task CreateUser(UserDto user);
+        Task DeleteUser(int id);
+        Task UpdateUser(int id, UserDto user);
     }
 }
