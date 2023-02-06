@@ -1,8 +1,7 @@
-﻿namespace VGLogger.API.ViewModels.Reviews
+﻿namespace VGLogger.API.ViewModels
 {
     public class CreateReviewViewModel
     {
-        public int Id { get; set; }
         public int StarRating { get; set; }
         public string Description { get; set; }
         public DateTime DateReviewed { get; set; }

@@ -6,7 +6,6 @@ using VGLogger.API.Controllers.Base;
 using AutoMapper;
 using System.Net;
 using VGLogger.Service.Services;
-using VGLogger.API.ViewModels.Reviews;
 
 namespace VGLogger.API.Controllers;
 
