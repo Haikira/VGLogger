@@ -20,7 +20,7 @@ namespace VGLogger.DAL.Models
         public int Email { get; set; }
 
         [Column("password")]
-        public int Password { get; set; }
+        public string Password { get; set; }
 
     }
 }

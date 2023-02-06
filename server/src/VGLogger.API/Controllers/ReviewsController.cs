@@ -50,9 +50,9 @@ public class ReviewsController : VGLoggerBaseController
     }
 
     [HttpGet]
-    public ActionResult<IList<ReviewViewModel>> GetReviews()
+    public async Task <ActionResult<IList<ReviewViewModel>>> GetReviews()
     {
-        var review = _reviewService.GetReviews();
+        var review = await _reviewService.GetReviews();
 
         return OkOrNoContent(_mapper.Map<IList<ReviewViewModel>>(review));
     }

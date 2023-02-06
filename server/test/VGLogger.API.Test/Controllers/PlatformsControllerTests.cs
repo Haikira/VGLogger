@@ -41,7 +41,11 @@ namespace VGLogger.API.Test.Controllers
             // Assert
             var result = actionResult.AssertObjectResult<IList<PlatformViewModel>, OkObjectResult>();
 
+            result.Should().BeSameAs(platformViewModels);
+
             await _platformService.Received(1).GetPlatforms();
+
+            _mapper.Received(1).Map<List<GameViewModel>>(platformDTOs);
         }
 
         [Fact]

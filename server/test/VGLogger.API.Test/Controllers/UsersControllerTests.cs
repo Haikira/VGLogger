@@ -25,6 +25,43 @@ namespace VGLogger.API.Test.Controllers
             _userService = Substitute.For<IUserService>();
         }
 
+        [Fact]
+        public async Task GetUsers_WhenUsersExist_MapsAndReturns()
+        {
+            // Arrange 
+            var userDtos = new List<UserDto> { new UserDto() };
+            var userViewModels = new List<UserViewModel> { new UserViewModel() };
+            var controller = RetrieveController();
+
+            _userService.GetUsers().Returns(userDtos);
+            _mapper.Map<IList<UserViewModel>>(userDtos).Returns(userViewModels);
+
+            // Act
+            var actionResult = await controller.GetUsers();
+
+            // Assert
+            var result = actionResult.AssertObjectResult<IList<UserViewModel>, OkObjectResult>();
+
+            result.Should().BeSameAs(userViewModels);
+
+            await _userService.Received(1).GetUsers();
+
+            _mapper.Received(1).Map<List<GameViewModel>>(userDtos);
+        }
+
+        [Fact]
+        public async Task GetUsers_WhenNoUsersExist_ReturnsNoContent()
+        {
+            // Arrange 
+            var controller = RetrieveController();
+
+            // Act
+            var actionResult = await controller.GetUsers();
+
+            // Assert
+            actionResult.AssertObjectResult<IList<UserViewModel>, NoContentResult>();
+        }
+
         private UsersController RetrieveController()
         {
             return new UsersController(_logger, _userService, _mapper);

@@ -25,6 +25,43 @@ namespace VGLogger.API.Test.Controllers
             _reviewService = Substitute.For<IReviewService>();
         }
 
+        [Fact]
+        public async Task GetReviews_WhenReviewsExist_MapsAndReturns()
+        {
+            // Arrange
+            var reviewDTOs = new List<ReviewDto>() { new ReviewDto() };
+            var reviewViewModels = new List<ReviewViewModel>() { new ReviewViewModel() };
+            var controller = RetrieveController();
+
+            _reviewService.GetReviews().Returns(reviewDTOs);
+            _mapper.Map<List<ReviewViewModel>>(reviewDTOs).Returns(reviewViewModels);
+
+            // Act
+            var actionResult = await controller.GetReviews();
+
+            // Assert
+            var result = actionResult.AssertObjectResult<IList<ReviewViewModel>, OkObjectResult>();
+
+            result.Should().BeSameAs(reviewViewModels);
+
+            await _reviewService.Received(1).GetReviews();
+
+            _mapper.Received(1).Map<List<DeveloperViewModel>>(reviewDTOs);
+        }
+
+        [Fact]
+        public async Task GetReviews_WhenNoReviewsExist_ReturnsNoContent()
+        {
+            // Arrange
+            var controller = RetrieveController();
+
+            // Act
+            var actionResult = await controller.GetReviews();
+
+            // Assert
+            actionResult.AssertObjectResult<IList<ReviewViewModel>, NoContentResult>();
+        }
+
         private ReviewsController RetrieveController()
         {
             return new ReviewsController(_logger, _reviewService, _mapper);
