@@ -12,9 +12,9 @@ namespace VGLogger.API.ViewModels
     {
         public UpdatePlatformValidator()
         {
-            RuleFor(rev => rev.Platform)
-                .NotNull().WithMessage("Name must be not null")
-                .MaximumLength(2000).WithMessage("Maximum character limit of 255 characters");
+            RuleFor(x => x.Platform)
+                .NotNull().WithMessage("Platform must be not null")
+                .MaximumLength(255).WithMessage("Platform maximum character limit of 255 characters");
         }
     }
 }

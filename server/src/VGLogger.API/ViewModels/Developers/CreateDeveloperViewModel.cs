@@ -11,9 +11,9 @@ namespace VGLogger.API.ViewModels
     {
         public CreateDeveloperValidator()
         {
-            RuleFor(rev => rev.Name)
+            RuleFor(x => x.Name)
                 .NotNull().WithMessage("Name must be not null")
-                .MaximumLength(2000).WithMessage("Maximum character limit of 255 characters");
+                .MaximumLength(255).WithMessage("Maximum character limit of 255 characters");
         }
     }
 }
