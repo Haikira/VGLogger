@@ -5,6 +5,7 @@ using VGLogger.Service.Dtos;
 using VGLogger.API.Controllers.Base;
 using AutoMapper;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VGLogger.API.Controllers;
 

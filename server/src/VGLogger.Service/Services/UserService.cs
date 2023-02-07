@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 using Unosquare.EntityFramework.Specification.Common.Extensions;
 using Unosquare.EntityFramework.Specification.EFCore.Extensions;
 using VGLogger.DAL.Interfaces;

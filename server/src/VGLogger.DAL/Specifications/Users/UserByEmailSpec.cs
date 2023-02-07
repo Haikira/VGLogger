@@ -15,7 +15,7 @@ namespace VGLogger.DAL.Specifications.Users
 
         public override Expression<Func<User, bool>> BuildExpression()
         {
-            return x => x.Email == _email;
+            return x => x.Email.Contains(_email);
         }
     }
 }

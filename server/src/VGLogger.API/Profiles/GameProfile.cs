@@ -14,7 +14,8 @@ namespace VGLogger.API.Profiles
 
         private void MapDtoToViewModel()
         {
-            CreateMap<GameDto, GameViewModel>();            
+            CreateMap<GameDto, GameViewModel>();
+            CreateMap<GameDto, GameDetailViewModel>();
         }
 
         private void MapViewModelToDto()
