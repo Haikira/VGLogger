@@ -12,5 +12,7 @@ namespace VGLogger.DAL.Models
         
         [Column("name")]
         public string Name { get; set; } 
+
+        public ICollection<GamePlatform> GamePlatforms { get; set; }
     }
 }

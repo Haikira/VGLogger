@@ -10,6 +10,7 @@ using VGLogger.Service.Profiles;
 using VGLogger.Service.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using AuthenticationService = VGLogger.Service.Services.AuthenticationService;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,50 @@ builder.Services
     .AddScoped<IReviewService, ReviewService>()
     .AddScoped<IAuthenticateService, AuthenticationService>()
     .AddScoped<IUserService, UserService>();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "VGLogger API",
+        Description = "An ASP.NET Core Web API for the VGLogger backend",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "Example Contact",
+            Url = new Uri("https://example.com/contact")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://example.com/license")
+        }
+    });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
 
 builder.Services.AddFluentValidationAutoValidation();
 

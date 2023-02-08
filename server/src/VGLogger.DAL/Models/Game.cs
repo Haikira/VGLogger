@@ -17,6 +17,11 @@ namespace VGLogger.DAL.Models
         public string Description { get; set; }
 
         [Column("developer_id")]
-        public int Developer_Id { get; set; }
+        public int DeveloperId { get; set; }
+
+        [ForeignKey(nameof(DeveloperId))]
+        public Developer Developer { get; set; }
+
+        public ICollection<GamePlatform> GamePlatforms { get; set; }        
     }
 }

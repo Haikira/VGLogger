@@ -14,7 +14,8 @@ namespace VGLogger.Service.Profiles
 
         private void ConfigureDomainToDto()
         {
-            CreateMap<Game, GameDto>();
+            CreateMap<Game, GameDto>()
+                .ForMember(d => d.Platforms, s => s.MapFrom(x => x.GamePlatforms.Select(y => y.Platform)));
         }
 
         private void ConfigureDtoToDomain()

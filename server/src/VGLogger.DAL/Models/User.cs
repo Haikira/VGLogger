@@ -22,5 +22,8 @@ namespace VGLogger.DAL.Models
         [Column("password")]
         public string Password { get; set; }
 
+        [Column("active")]
+        public bool Active { get; set; }
+
     }
 }

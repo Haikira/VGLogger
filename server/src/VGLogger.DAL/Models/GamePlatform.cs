@@ -13,8 +13,14 @@ namespace VGLogger.DAL.Models
         [Column("game_id")]
         public int GameId { get; set; }
 
+        [ForeignKey(nameof(GameId))]
+        public Game Game { get; set; }
+
         [Column("platform_id")]
         public int PlatformId { get; set; }
+
+        [ForeignKey(nameof(PlatformId))]
+        public Platform Platform { get; set; }
 
         [Column("release_date")]
         public DateTime ReleaseDate { get; set; }

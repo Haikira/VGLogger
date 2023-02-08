@@ -4,6 +4,7 @@ using Unosquare.EntityFramework.Specification.Common.Extensions;
 using Unosquare.EntityFramework.Specification.EFCore.Extensions;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
+using VGLogger.DAL.Specifications.Games;
 using VGLogger.DAL.Specifications.Users;
 using VGLogger.Service.Dtos;
 using VGLogger.Service.Exceptions;
@@ -38,7 +39,9 @@ namespace VGLogger.Service.Services
 
             if (userToDelete == null) throw new NotFoundException($"Could not find user with id: {id}");
 
-            _database.Delete(userToDelete);
+            userToDelete.Active = false;
+
+            _database.AddAsync(userToDelete);
             await _database.SaveChangesAsync();
         }
 
@@ -50,6 +53,16 @@ namespace VGLogger.Service.Services
                 ).SingleOrDefaultAsync();
 
             return user ?? throw new NotFoundException($"Could not find user with ID: {id}");
+        }
+
+        public async Task<List<GameDto>> GetUserGames(int userId)
+        {
+            var games = await _mapper.ProjectTo<GameDto>(_database
+                .Get<Game>()
+                .Where(new GamesByUserIdSpec(userId))
+                ).ToListAsync();
+
+            return games ?? throw new NotFoundException($"Could not find game titles for user with ID: {userId}");
         }
 
         public Task<List<UserDto>> GetUsers()

@@ -9,5 +9,7 @@ namespace VGLogger.Service.Interfaces
         Task CreateUser(UserDto user);
         Task DeleteUser(int id);
         Task UpdateUser(int id, UserDto user);
+
+        Task<List<GameDto>> GetUserGames(int userId);
     }
 }
