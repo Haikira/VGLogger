@@ -2,7 +2,6 @@
 using AutoMapper;
 using FluentAssertions;
 using NSubstitute;
-using System.Security.Principal;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
 using VGLogger.Service.Interfaces;
@@ -54,10 +53,17 @@ namespace VGLogger.Service.Test.Services
         public void GetDevelopers_WhenDevelopersExist_ReturnsDeveloperList()
         {
             // Arrange
+            var developerList = _fixture.Build<Developer>().CreateMany();
+
+            _database.Get<Developer>().Returns(developerList.AsQueryable());
+
+            var service = RetrieveService();
 
             // Act
+            var result = service.GetDevelopers();
 
             // Assert
+            result.Should().BeEquivalentTo(developerList, options => options.ExcludingMissingMembers());
         }
 
         [Fact]

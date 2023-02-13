@@ -20,7 +20,6 @@ namespace VGLogger.API.Controllers
         private readonly IMapper _mapper;
         private readonly IAuthenticateService _service;
 
-
         public AuthenticationController(IMapper mapper, IAuthenticateService service)
         {
             _mapper = mapper;
@@ -47,7 +46,6 @@ namespace VGLogger.API.Controllers
         [HttpGet]
         public async Task<ActionResult<AuthenticationResultViewModel>> Refresh([FromServices] IAuthorizedAccountProvider authorizedAccountProvider)
         {
-
             var user = await authorizedAccountProvider.GetLoggedInAccount();
 
             if (user is null)
