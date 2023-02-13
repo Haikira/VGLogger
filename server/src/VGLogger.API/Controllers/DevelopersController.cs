@@ -24,7 +24,7 @@ public class DevelopersController : VGLoggerBaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateDeveloper([FromBody] CreateDeveloperViewModel createDeveloperViewModel)
+    public async Task<ActionResult> CreateDeveloper([FromBody] CreateDeveloperViewModel createDeveloperViewModel)
     {
         await _developerService.CreateDeveloper(_mapper.Map<DeveloperDto>(createDeveloperViewModel));
 
@@ -32,7 +32,7 @@ public class DevelopersController : VGLoggerBaseController
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteDeveloper(int id)
+    public async Task<ActionResult> DeleteDeveloper(int id)
     {
         await _developerService.DeleteDeveloper(id);
 

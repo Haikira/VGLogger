@@ -66,26 +66,6 @@ namespace VGLogger.Service.Test.Services
             result.Should().BeEquivalentTo(developerList, options => options.ExcludingMissingMembers());
         }
 
-        [Fact]
-        public void UpdateDeveloper_DevelopersDoesNotExist_ThrowNotFoundException()
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
-        }
-
-        [Fact]
-        public void DeleteDeveloper_DevelopersDoesNotExist_ThrowNotFoundException()
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
-        }
-
         private IDeveloperService RetrieveService()
         {
             return new DeveloperService(_database, _mapper);

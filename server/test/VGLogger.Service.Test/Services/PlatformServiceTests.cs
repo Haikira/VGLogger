@@ -1,7 +1,9 @@
 ﻿using AutoFixture;
 using AutoMapper;
+using FluentAssertions;
 using NSubstitute;
 using VGLogger.DAL.Interfaces;
+using VGLogger.DAL.Models;
 using VGLogger.Service.Interfaces;
 using VGLogger.Service.Profiles;
 using VGLogger.Service.Services;
@@ -23,6 +25,44 @@ namespace VGLogger.Service.Test.Services
             _fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
                 .ForEach(b => _fixture.Behaviors.Remove(b));
             _fixture.Behaviors.Add(new OmitOnRecursionBehavior(1));
+        }
+
+        [Fact]
+        public void GetPlatform_WhenPlatformExists_ReturnsPlatform()
+        {
+            // Arrange
+            const int id = 1;
+
+            var platform = new Platform { Id = id };
+
+            var platforms = new List<Platform> { platform };
+
+            _database.Get<Platform>().Returns(platforms.AsQueryable());
+
+            var service = RetrieveService();
+
+            // Act
+            var result = service.GetPlatformById(id);
+
+            // Assert
+            result.Should().BeEquivalentTo(platform, options => options.ExcludingMissingMembers());
+        }
+
+        [Fact]
+        public void GetPlatforms_WhenPlatformsExists_ReturnsPlatformList()
+        {
+            // Arrange
+            var platformList = _fixture.Build<Platform>().CreateMany();
+
+            _database.Get<Platform>().Returns(platformList.AsQueryable());
+
+            var service = RetrieveService();
+
+            // Act
+            var result = service.GetPlatforms();
+
+            // Assert
+            result.Should().BeEquivalentTo(platformList, options => options.ExcludingMissingMembers());
         }
 
         private IPlatformService RetrieveService()

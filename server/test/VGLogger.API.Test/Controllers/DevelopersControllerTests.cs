@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using System.Net;
 using VGLogger.Api.Test.Extensions;
 using VGLogger.API.Controllers;
 using VGLogger.API.ViewModels;
@@ -59,6 +60,45 @@ namespace VGLogger.API.Test.Controllers
 
             // Assert
             actionResult.AssertResult<IList<DeveloperViewModel>, NoContentResult>();            
+        }
+
+        [Theory]
+        [InlineData("name")]
+        public async Task CreateDeveloper_WhenValidDataEntered_MappedAndSaved(string name)
+        {
+            // Arrange
+            var developer = new DeveloperDto { Name = name };
+            var createDeveloperViewModel = new CreateDeveloperViewModel();
+
+            _mapper.Map<DeveloperDto>(createDeveloperViewModel).Returns(developer);
+
+            var controller = RetrieveController();
+
+            // Act
+            var actionResult = await controller.CreateDeveloper(createDeveloperViewModel);
+
+            // Assert
+            actionResult.AssertResult<StatusCodeResult>(HttpStatusCode.Created);
+
+            await _developerService.Received(1).CreateDeveloper(developer);
+            _mapper.Received(1).Map<DeveloperDto>(createDeveloperViewModel);
+        }
+
+        [Fact]
+        public async Task DeleteDeveloper_WhenCalledWithValidId_DeletedAndSaved()
+        {
+            // Arrange
+            const int id = 1;
+
+            var controller = RetrieveController();
+
+            // Act
+            var actionResult = await controller.DeleteDeveloper(id);
+
+            // Assert
+            actionResult.AssertResult<NoContentResult>();
+
+            await _developerService.Received(1).DeleteDeveloper(id);
         }
 
         private DevelopersController RetrieveController()
