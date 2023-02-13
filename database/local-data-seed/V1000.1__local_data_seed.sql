@@ -11,7 +11,7 @@ insert into platforms (name) values ('Playstation 4');
 insert into platforms (name) values ('Playstation 5');
 insert into platforms (name) values ('Microsoft Windows');
 
-insert into users (first_name, last_name, email, password, active) values ('Campbell', 'Gilpin', 'campbell.gilpin@unosquare.com', '$2a$11$mcQe43JwQRTGX5razhuIhuBj17uQ1u3YIYgqJsQebQwpHgiNoot1u', true);
+insert into users (first_name, last_name, email, password, active) values ('Campbell', 'Gilpin', 'campbell.gilpin@unosquare.com', '$2a$11$xjdF4.ZSFp/JOfkciB7QveFayThWY0Z5BMcaLFBzUJOkcxK1w8/oW', true);
 
 insert into games_platforms(game_id, platform_id, release_date) values ((select id from games where name ='God of War Ragnarok'), (select id from platforms where name ='Playstation 5'), '2022-11-09');
 insert into games_platforms(game_id, platform_id, release_date) values ((select id from games where name ='God of War Ragnarok'), (select id from platforms where name ='Playstation 4'), '2022-11-09');

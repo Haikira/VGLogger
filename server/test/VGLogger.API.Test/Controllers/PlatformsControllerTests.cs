@@ -45,7 +45,7 @@ namespace VGLogger.API.Test.Controllers
 
             await _platformService.Received(1).GetPlatforms();
 
-            _mapper.Received(1).Map<List<GameViewModel>>(platformDTOs);
+            _mapper.Received(1).Map<List<PlatformViewModel>>(platformDTOs);
         }
 
         [Fact]

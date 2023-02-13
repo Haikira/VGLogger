@@ -46,7 +46,7 @@ namespace VGLogger.API.Test.Controllers
 
             await _reviewService.Received(1).GetReviews();
 
-            _mapper.Received(1).Map<List<DeveloperViewModel>>(reviewDTOs);
+            _mapper.Received(1).Map<List<ReviewViewModel>>(reviewDTOs);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace VGLogger.API.Test.Controllers
             var actionResult = await controller.GetReviews();
 
             // Assert
-            actionResult.AssertObjectResult<IList<ReviewViewModel>, NoContentResult>();
+            actionResult.AssertResult<IList<ReviewViewModel>, NoContentResult>();
         }
 
         private ReviewsController RetrieveController()

@@ -34,7 +34,7 @@ namespace VGLogger.API.Test.Controllers
             var controller = RetrieveController();
 
             _userService.GetUsers().Returns(userDtos);
-            _mapper.Map<IList<UserViewModel>>(userDtos).Returns(userViewModels);
+            _mapper.Map<List<UserViewModel>>(userDtos).Returns(userViewModels);
 
             // Act
             var actionResult = await controller.GetUsers();
@@ -46,7 +46,7 @@ namespace VGLogger.API.Test.Controllers
 
             await _userService.Received(1).GetUsers();
 
-            _mapper.Received(1).Map<List<GameViewModel>>(userDtos);
+            _mapper.Received(1).Map<List<UserViewModel>>(userDtos);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace VGLogger.API.Test.Controllers
             var actionResult = await controller.GetUsers();
 
             // Assert
-            actionResult.AssertObjectResult<IList<UserViewModel>, NoContentResult>();
+            actionResult.AssertResult<IList<UserViewModel>, NoContentResult>();
         }
 
         private UsersController RetrieveController()

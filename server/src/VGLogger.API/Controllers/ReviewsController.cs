@@ -53,7 +53,7 @@ public class ReviewsController : VGLoggerBaseController
     {
         var review = await _reviewService.GetReviews();
 
-        return OkOrNoContent(_mapper.Map<IList<ReviewViewModel>>(review));
+        return OkOrNoContent(_mapper.Map<List<ReviewViewModel>>(review));
     }
 
     [HttpPut("{id}")]

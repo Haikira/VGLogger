@@ -25,6 +25,7 @@ public class UsersController : VGLoggerBaseController
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<ActionResult> CreateUser([FromBody] CreateUserViewModel createUserViewModel)
     {
         await _userService.CreateUser(_mapper.Map<UserDto>(createUserViewModel));
@@ -55,6 +56,7 @@ public class UsersController : VGLoggerBaseController
 
         return OkOrNoContent(_mapper.Map<List<UserViewModel>>(users));
     }
+
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateUser(int id, [FromBody] UpdateUserViewModel updateUserViewModel)
     {
