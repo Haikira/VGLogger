@@ -25,7 +25,6 @@ public class UsersController : VGLoggerBaseController
     }
 
     [HttpPost]
-    [AllowAnonymous]
     public async Task<ActionResult> CreateUser([FromBody] CreateUserViewModel createUserViewModel)
     {
         await _userService.CreateUser(_mapper.Map<UserDto>(createUserViewModel));
