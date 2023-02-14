@@ -48,9 +48,9 @@ namespace VGLogger.Service.Services
             return game ?? throw new NotFoundException($"Could not find game with ID: {id}");
         }
 
-        public Task<List<GameDto>> GetGames()
+        public async Task<List<GameDto>> GetGames()
         {
-            return _mapper.ProjectTo<GameDto>(_database.Get<Game>()).ToListAsync();
+            return await _mapper.ProjectTo<GameDto>(_database.Get<Game>()).ToListAsync();
         }
 
         public async Task UpdateGame(int id, GameDto game)

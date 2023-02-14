@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using AutoMapper;
 using FluentAssertions;
+using MockQueryable.NSubstitute;
 using NSubstitute;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
@@ -28,41 +29,40 @@ namespace VGLogger.Service.Test.Services
         }
 
         [Fact]
-        public void GetGame_WhenGameExists_ReturnsGame()
+        public async Task GetGame_WhenGameExists_ReturnsGame()
         {
             // Arrange
             const int id = 1;
 
             var game = new Game { Id = id };
-
             var games = new List<Game> { game };
 
-            _database.Get<Game>().Returns(games.AsQueryable());
+            _database.Get<Game>().Returns(games.AsQueryable().BuildMock());
 
             var service = RetrieveService();
 
             // Act
-            var result = service.GetGameById(id);
+            var result = await service.GetGameById(id);
 
             // Assert
             result.Should().BeEquivalentTo(game, options => options.ExcludingMissingMembers());
         }
 
         [Fact]
-        public void GetGames_WhenGamesExists_ReturnsGameList()
+        public async Task GetGames_WhenGamesExists_ReturnsGameList()
         {
             // Arrange
-            var gameList = _fixture.Build<Game>().CreateMany();
+            var games = _fixture.Build<Game>().CreateMany();
 
-            _database.Get<Game>().Returns(gameList.AsQueryable());
+            _database.Get<Game>().Returns(games.AsQueryable().BuildMock());
 
             var service = RetrieveService();
 
             // Act
-            var result = service.GetGames();
+            var result = await service.GetGames();
 
             // Assert
-            result.Should().BeEquivalentTo(gameList, options => options.ExcludingMissingMembers());
+            result.Should().BeEquivalentTo(games, options => options.ExcludingMissingMembers());
         }
 
         private IGameService RetrieveService()

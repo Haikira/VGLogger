@@ -1,7 +1,10 @@
 ﻿using AutoFixture;
 using AutoMapper;
+using FluentAssertions;
+using MockQueryable.NSubstitute;
 using NSubstitute;
 using VGLogger.DAL.Interfaces;
+using VGLogger.DAL.Models;
 using VGLogger.Service.Interfaces;
 using VGLogger.Service.Profiles;
 using VGLogger.Service.Services;
@@ -23,6 +26,43 @@ namespace VGLogger.Service.Test.Services
             _fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
                 .ForEach(b => _fixture.Behaviors.Remove(b));
             _fixture.Behaviors.Add(new OmitOnRecursionBehavior(1));
+        }
+
+        [Fact]
+        public async Task GetUser_WhenUserExists_ReturnsUser()
+        {
+            // Arrange
+            const int id = 1;
+
+            var user = new User { Id = id };
+            var users = new List<User> { user };
+
+            _database.Get<User>().Returns(users.AsQueryable().BuildMock());
+
+            var service = RetrieveService();
+
+            // Act
+            var result = await service.GetUserById(id);
+
+            // Assert
+            result.Should().BeEquivalentTo(user, options => options.ExcludingMissingMembers());
+        }
+
+        [Fact]
+        public async Task GetUsers_WhenUsersExists_ReturnsUserList()
+        {
+            // Arrange
+            var users = _fixture.Build<User>().CreateMany();
+
+            _database.Get<User>().Returns(users.AsQueryable().BuildMock());
+
+            var service = RetrieveService();
+
+            // Act
+            var result = await service.GetUsers();
+
+            // Assert
+            result.Should().BeEquivalentTo(users, options => options.ExcludingMissingMembers());
         }
 
         private IUserService RetrieveService()

@@ -1,15 +1,16 @@
 ﻿using AutoFixture;
 using AutoMapper;
 using FluentAssertions;
+using MockQueryable.NSubstitute;
 using NSubstitute;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
+using VGLogger.Service.Exceptions;
 using VGLogger.Service.Interfaces;
 using VGLogger.Service.Profiles;
 using VGLogger.Service.Services;
 
 namespace VGLogger.Service.Test.Services
-
 {
     public class DeveloperServiceTests
     {
@@ -29,41 +30,59 @@ namespace VGLogger.Service.Test.Services
         }
 
         [Fact]
-        public void GetDeveloper_WhenDeveloperExists_ReturnsDeveloper()
+        public async Task DeleteDeveloper_DeveloperDoesNotExist_ThrowNotFoundException()
+        {
+            // Arrange 
+            const int correctId = 1;
+            const int incorrectId = 2;
+
+            var correctDeveloper = _fixture.Build<Developer>().With(x => x.Id, correctId).Create();
+            var incorrectDeveloper = _fixture.Build<Developer>().With(x => x.Id, incorrectId).Create();
+
+            _database.Get<Developer>().Returns(new List<Developer> { incorrectDeveloper }.AsQueryable().BuildMock());
+
+            var service = RetrieveService();
+
+            // Act & Assert
+            await Assert.ThrowsAsync<NotFoundException>(() => service.DeleteDeveloper(correctId));
+            _database.Received(1).Get<Developer>();
+        }
+
+        [Fact]
+        public async Task GetDeveloper_WhenDeveloperExists_ReturnsDeveloper()
         {
             // Arrange
             const int id = 1;
 
             var developer = new Developer { Id = id };
-
             var developers = new List<Developer> { developer };
 
-            _database.Get<Developer>().Returns(developers.AsQueryable());
+            _database.Get<Developer>().Returns(developers.AsQueryable().BuildMock());
 
             var service = RetrieveService();
 
             // Act
-            var result = service.GetDeveloperById(id);
+            var result = await service.GetDeveloperById(id);
 
             // Assert
             result.Should().BeEquivalentTo(developer, options => options.ExcludingMissingMembers());
         }
 
         [Fact]
-        public void GetDevelopers_WhenDevelopersExist_ReturnsDeveloperList()
+        public async Task GetDevelopers_WhenDevelopersExist_ReturnsDeveloperListAsync()
         {
             // Arrange
-            var developerList = _fixture.Build<Developer>().CreateMany();
+            var developers = _fixture.Build<Developer>().CreateMany();
 
-            _database.Get<Developer>().Returns(developerList.AsQueryable());
+            _database.Get<Developer>().Returns(developers.AsQueryable().BuildMock());
 
             var service = RetrieveService();
 
             // Act
-            var result = service.GetDevelopers();
+            var result = await service.GetDevelopers();
 
             // Assert
-            result.Should().BeEquivalentTo(developerList, options => options.ExcludingMissingMembers());
+            result.Should().BeEquivalentTo(developers, options => options.ExcludingMissingMembers());
         }
 
         private IDeveloperService RetrieveService()

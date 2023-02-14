@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using AutoMapper;
 using FluentAssertions;
+using MockQueryable.NSubstitute;
 using NSubstitute;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
@@ -28,41 +29,40 @@ namespace VGLogger.Service.Test.Services
         }
 
         [Fact]
-        public void GetPlatform_WhenPlatformExists_ReturnsPlatform()
+        public async Task GetPlatform_WhenPlatformExists_ReturnsPlatform()
         {
             // Arrange
             const int id = 1;
 
             var platform = new Platform { Id = id };
-
             var platforms = new List<Platform> { platform };
 
-            _database.Get<Platform>().Returns(platforms.AsQueryable());
+            _database.Get<Platform>().Returns(platforms.AsQueryable().BuildMock());
 
             var service = RetrieveService();
 
             // Act
-            var result = service.GetPlatformById(id);
+            var result = await service.GetPlatformById(id);
 
             // Assert
             result.Should().BeEquivalentTo(platform, options => options.ExcludingMissingMembers());
         }
 
         [Fact]
-        public void GetPlatforms_WhenPlatformsExists_ReturnsPlatformList()
+        public async Task GetPlatforms_WhenPlatformsExists_ReturnsPlatformList()
         {
             // Arrange
-            var platformList = _fixture.Build<Platform>().CreateMany();
+            var platforms = _fixture.Build<Platform>().CreateMany();
 
-            _database.Get<Platform>().Returns(platformList.AsQueryable());
+            _database.Get<Platform>().Returns(platforms.AsQueryable().BuildMock());
 
             var service = RetrieveService();
 
             // Act
-            var result = service.GetPlatforms();
+            var result = await service.GetPlatforms();
 
             // Assert
-            result.Should().BeEquivalentTo(platformList, options => options.ExcludingMissingMembers());
+            result.Should().BeEquivalentTo(platforms, options => options.ExcludingMissingMembers());
         }
 
         private IPlatformService RetrieveService()

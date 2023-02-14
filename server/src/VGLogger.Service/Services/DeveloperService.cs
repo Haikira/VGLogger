@@ -48,9 +48,9 @@ namespace VGLogger.Service.Services
             return developer ?? throw new NotFoundException($"Could not find developer with ID: {id}");
         }
 
-        public Task<List<DeveloperDto>> GetDevelopers()
+        public async Task<List<DeveloperDto>> GetDevelopers()
         {
-            return _mapper.ProjectTo<DeveloperDto>(_database.Get<Developer>()).ToListAsync();
+            return await _mapper.ProjectTo<DeveloperDto>(_database.Get<Developer>()).ToListAsync();
         }
 
         public async Task UpdateDeveloper(int id, DeveloperDto developer)
