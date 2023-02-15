@@ -5,6 +5,7 @@ using MockQueryable.NSubstitute;
 using NSubstitute;
 using VGLogger.DAL.Interfaces;
 using VGLogger.DAL.Models;
+using VGLogger.Service.Exceptions;
 using VGLogger.Service.Interfaces;
 using VGLogger.Service.Profiles;
 using VGLogger.Service.Services;
@@ -74,6 +75,8 @@ namespace VGLogger.Service.Test.Services
         {
             var config = new MapperConfiguration(cfg => {
                 cfg.AddProfile<GameProfile>();
+                cfg.AddProfile<DeveloperProfile>();
+                cfg.AddProfile<PlatformProfile>();
             });
 
             return new Mapper(config);
