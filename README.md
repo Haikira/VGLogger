@@ -154,6 +154,32 @@ Response
 ]
 
 GET /users/{id}/games
+
+Response 
+
+[
+  {
+    "id": 2,
+    "name": "God of War Ragnarok",
+    "description": "Embark on an epic and heartfelt journey as Kratos and Atreus struggle with holding on and letting go."
+  },
+  {
+    "id": 1,
+    "name": "God of War",
+    "description": "His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters."
+  },
+  {
+    "id": 4,
+    "name": "Elden Ring",
+    "description": "In the Lands Between ruled by Queen Marika the Eternal, the Elden Ring, the source of the Erdtree, has been shattered."
+  },
+  {
+    "id": 3,
+    "name": "Uncharted 4",
+    "description": "Several years after his last adventure, retired fortune hunter Nathan Drake, is forced back into the world of thieves."
+  }
+]
+
 POST /users
 
 Request
