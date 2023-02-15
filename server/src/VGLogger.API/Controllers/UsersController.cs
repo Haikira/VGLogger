@@ -63,4 +63,13 @@ public class UsersController : VGLoggerBaseController
 
         return NoContent();
     }
+
+    [HttpGet("{id}/games", Name = "GetUserGames")]
+    [AllowAnonymous]
+    public async Task<ActionResult<IList<GameViewModel>>> GetUserGames(int id)
+    {
+        var userGames = await _userService.GetUserGames(id);
+
+        return Ok(_mapper.Map<List<GameViewModel>>(userGames));
+    }
 }

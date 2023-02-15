@@ -57,10 +57,12 @@ namespace VGLogger.Service.Services
 
         public async Task<List<GameDto>> GetUserGames(int userId)
         {
-            var games = await _mapper.ProjectTo<GameDto>(_database
-                .Get<Game>()
-                .Where(new GamesByUserIdSpec(userId))
-                ).ToListAsync();
+            // TODO - Investigate more effecient/cleaner way to query for User Games
+            var userGames = _database.Get<UserGame>().Where(x => x.UserId == userId);
+            var gamePlatforms = _database.Get<GamePlatform>().Where(x => userGames.Select(y => y.GamePlatformId).Contains(x.Id));
+
+            var games = _mapper.Map<List<GameDto>>(gamePlatforms.Select(x => x.Game));
+
 
             return games ?? throw new NotFoundException($"Could not find game titles for user with ID: {userId}");
         }
