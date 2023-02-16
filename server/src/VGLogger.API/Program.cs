@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.OpenApi.Models;
 using VGLogger.Api.Authentication;
 using VGLogger.API.Filters;
 using VGLogger.DAL.Context;
@@ -8,9 +10,7 @@ using VGLogger.DAL.Interfaces;
 using VGLogger.Service.Interfaces;
 using VGLogger.Service.Profiles;
 using VGLogger.Service.Services;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using AuthenticationService = VGLogger.Service.Services.AuthenticationService;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

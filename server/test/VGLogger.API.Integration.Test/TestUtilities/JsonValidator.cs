@@ -1,14 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using FluentAssertions;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using NJsonSchema.Generation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NJsonSchema;
-using FluentAssertions;
 
 namespace VGLogger.API.Integration.Test.TestUtilities
 {
