@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VGLogger.DAL.Context;
+﻿using VGLogger.DAL.Context;
+using VGLogger.DAL.Models;
 
 namespace VGLogger.API.Integration.Test.Base
 {
@@ -11,6 +7,14 @@ namespace VGLogger.API.Integration.Test.Base
     {
         public static void SeedDatabase(VGLoggerContext database)
         {
+            var developer = new Developer 
+            { 
+                Id = 1,
+                Name = "Test"
+            };
+
+            database.Add(developer);
+            database.SaveChanges();
         }
     }
 }

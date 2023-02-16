@@ -107,3 +107,6 @@ app.UseAuthorization();
 app.MapControllers().RequireAuthorization();
 
 app.Run();
+
+// Workaround for IntegrationClassFixture refrencing wrong Program
+public partial class Program { }
