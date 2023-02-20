@@ -72,4 +72,18 @@ public class UsersController : VGLoggerBaseController
 
         return Ok(_mapper.Map<List<GameViewModel>>(userGames));
     }
+
+    [HttpPost("{id}/games", Name = "CreateUserGames")]
+    [AllowAnonymous]
+    public async Task<ActionResult> CreateUserGames(int id, ICollection<CreateUserGameViewModel> games)
+    {
+        throw new NotImplementedException();
+    }
+
+    [HttpPut("{id}/games", Name = "UpdateUserGames")]
+    [AllowAnonymous]
+    public async Task<ActionResult> UpdateUserGames(int id, ICollection<UpdateUserGameViewModel> games)
+    {
+        throw new NotImplementedException();
+    }
 }

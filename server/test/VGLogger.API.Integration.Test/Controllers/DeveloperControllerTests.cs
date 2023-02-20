@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using System.Net;
 using System.Net.Http.Json;
+using VGLogger.API.Integration.Test.Base;
 using VGLogger.API.Integration.Test.Models;
 using VGLogger.API.Integration.Test.TestUtilities;
 using VGLogger.API.ViewModels;
@@ -14,9 +15,9 @@ namespace VGLogger.API.Integration.Test.Controllers
         private readonly HttpClient _httpClient;
         private readonly ITestOutputHelper _testOutputHelper;
 
-        public DeveloperControllerTests(ITestOutputHelper testOutputHelper, HttpClient httpClient)
+        public DeveloperControllerTests(ITestOutputHelper testOutputHelper, IntegrationClassFixture integrationClassFixture)
         {
-            _httpClient = httpClient;
+            _httpClient = integrationClassFixture.Host.CreateClient();
             _testOutputHelper = testOutputHelper;            
         }
 
@@ -41,7 +42,7 @@ namespace VGLogger.API.Integration.Test.Controllers
             var value = await response.Content.ReadAsStringAsync();
 
             var result = value.VerifyDeSerialize<ValidationModel>();
-            result.Errors.CheckIfErrorPresent("Name", "Name must be not null");
+            result.Errors.CheckIfErrorPresent("Name", "The Name field is required.");
 
             _testOutputHelper.WriteLine(value);
         }

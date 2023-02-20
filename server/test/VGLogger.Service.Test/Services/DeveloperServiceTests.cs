@@ -21,6 +21,7 @@ namespace VGLogger.Service.Test.Services
         public DeveloperServiceTests()
         {
             _database = Substitute.For<IVGLoggerDatabase>();
+            // TODO - Mock
             _mapper = GetMapper();
             _fixture = new Fixture();
 

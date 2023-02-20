@@ -89,6 +89,8 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -105,6 +107,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers().RequireAuthorization();
+
+app.MapHealthChecks("/health");
+
+app.UseCors(
+            o => o
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+        );
 
 app.Run();
 

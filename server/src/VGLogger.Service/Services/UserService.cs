@@ -59,12 +59,26 @@ namespace VGLogger.Service.Services
         {
             // TODO - Investigate more effecient/cleaner way to query for User Games
             var userGames = _database.Get<UserGame>().Where(x => x.UserId == userId);
-            var gamePlatforms = _database.Get<GamePlatform>().Where(x => userGames.Select(y => y.GamePlatformId).Contains(x.Id));
+            
+            var gamePlatforms = _database
+                .Get<GamePlatform>()
+                .Where(x => userGames.Select(y => y.GamePlatformId).Contains(x.Id))
+                .Select(x => x.Game);
 
-            var games = _mapper.Map<List<GameDto>>(gamePlatforms.Select(x => x.Game));
+            var games = _mapper.Map<List<GameDto>>(gamePlatforms);
 
 
             return games ?? throw new NotFoundException($"Could not find game titles for user with ID: {userId}");
+        }
+
+        public async Task UpdateUserGames()
+        {
+            
+        }
+
+        public async Task CreateUserGames()
+        {
+
         }
 
         public Task<List<UserDto>> GetUsers()
