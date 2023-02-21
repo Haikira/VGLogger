@@ -4,7 +4,7 @@ namespace VGLogger.API.ViewModels
 {
     public class CreatePlatformViewModel
     {
-        public string Platform { get; set; }
+        public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
     }
 
@@ -12,9 +12,9 @@ namespace VGLogger.API.ViewModels
     {
         public CreatePlatformValidator()
         {
-            RuleFor(x => x.Platform)
-                .NotNull().WithMessage("Platform must be not null")
-                .MaximumLength(255).WithMessage("Platform maximum character limit of 255 characters");
+            RuleFor(x => x.Name)
+                .NotNull().WithMessage("Name must be not null")
+                .MaximumLength(255).WithMessage("Name maximum character limit of 255 characters");
         }
     }
 }

@@ -34,9 +34,25 @@ namespace VGLogger.API.Integration.Test.Controllers
         [Fact]
         public async Task Create_WhenNewDeveloperDetailsInvalid_ReturnsValidationErrors()
         {
-            CreateDeveloperViewModel newDeveloper = new CreateDeveloperViewModel();
+            var newDeveloper = new CreateDeveloperViewModel();
 
             var response = await _httpClient.PostAsJsonAsync("/developers/", newDeveloper);
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            var value = await response.Content.ReadAsStringAsync();
+
+            var result = value.VerifyDeSerialize<ValidationModel>();
+            result.Errors.CheckIfErrorPresent("Name", "The Name field is required.");
+
+            _testOutputHelper.WriteLine(value);
+        }
+
+        [Fact]
+        public async Task Update_WhenDeveloperDetailsInvalid_ReturnsValidationErrors()
+        {
+            var updateDeveloper = new UpdateDeveloperViewModel();
+
+            var response = await _httpClient.PostAsJsonAsync("/developers/", updateDeveloper);
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
             var value = await response.Content.ReadAsStringAsync();

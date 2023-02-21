@@ -7,13 +7,32 @@ namespace VGLogger.API.Integration.Test.Base
     {
         public static void SeedDatabase(VGLoggerContext database)
         {
-            var developer = new Developer 
-            { 
+            var developer = new Developer
+            {
                 Id = 1,
-                Name = "Test"
+                Name = "TestDeveloper"
+            };
+
+            var platform = new Platform
+            {
+                Id = 1,
+                Name = "TestPlatform"
+            };
+
+            var game = new Game 
+            { 
+                Description = "",
+                Developer = developer,
+                DeveloperId = developer.Id,
+                GamePlatforms = new List<GamePlatform>(),
+                Id = 1,
+                Name = "TestGame"
             };
 
             database.Add(developer);
+            database.Add(platform);
+            database.Add(game);
+
             database.SaveChanges();
         }
     }
