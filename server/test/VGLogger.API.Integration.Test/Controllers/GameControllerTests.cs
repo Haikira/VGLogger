@@ -40,7 +40,18 @@ namespace VGLogger.API.Integration.Test.Controllers
         [Fact]
         public async Task Create_WhenNewGameDetailsInvalid_ReturnsValidationErrors()
         {
-            throw new NotImplementedException();
+            var newGame = new CreateGameViewModel();
+
+            var response = await _httpClient.PostAsJsonAsync("/games/", newGame);
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            var value = await response.Content.ReadAsStringAsync();
+
+            var result = value.VerifyDeSerialize<ValidationModel>();
+            result.Errors.CheckIfErrorPresent("Name", "Name must not be null");
+            result.Errors.CheckIfErrorPresent("Description", "Description must not be null");
+
+            _testOutputHelper.WriteLine(value);
         }
 
         [Fact]

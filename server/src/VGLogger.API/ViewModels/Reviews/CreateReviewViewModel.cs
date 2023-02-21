@@ -16,7 +16,7 @@ namespace VGLogger.API.ViewModels
         public CreateReviewValidator()
         {
             RuleFor(x => x.Description)
-                .NotNull().WithMessage("Description must be not null")
+                .NotNull().WithMessage("Description must not be null")
                 .MaximumLength(2000).WithMessage("Description maximum character limit of 2000 characters");
             RuleFor(x => x.StarRating).GreaterThan(0).LessThanOrEqualTo(5).WithMessage("Star rating must be between 1 and 5");
         }

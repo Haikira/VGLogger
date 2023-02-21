@@ -15,7 +15,7 @@ namespace VGLogger.API.ViewModels
         public UpdateGameValidator()
         {
             RuleFor(x => x.Name)
-                .NotNull().WithMessage("Name must be not null")
+                .NotNull().WithMessage("Name must not be null")
                 .MaximumLength(255).WithMessage("Maximum character limit of 255 characters");
         }
     }

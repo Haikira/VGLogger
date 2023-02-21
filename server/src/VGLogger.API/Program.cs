@@ -74,7 +74,9 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidation(s =>
+    s.RegisterValidatorsFromAssemblyContaining<Program>()
+);
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

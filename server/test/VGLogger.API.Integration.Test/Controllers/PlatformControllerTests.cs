@@ -42,7 +42,7 @@ namespace VGLogger.API.Integration.Test.Controllers
             var value = await response.Content.ReadAsStringAsync();
 
             var result = value.VerifyDeSerialize<ValidationModel>();
-            result.Errors.CheckIfErrorPresent("Name", "The Name field is required.");
+            result.Errors.CheckIfErrorPresent("Name", "Name must not be null");
 
             _testOutputHelper.WriteLine(value);
         }
@@ -58,7 +58,7 @@ namespace VGLogger.API.Integration.Test.Controllers
             var value = await response.Content.ReadAsStringAsync();
 
             var result = value.VerifyDeSerialize<ValidationModel>();
-            result.Errors.CheckIfErrorPresent("Name", "The Name field is required.");
+            result.Errors.CheckIfErrorPresent("Name", "Name must not be null");
 
             _testOutputHelper.WriteLine(value);
         }

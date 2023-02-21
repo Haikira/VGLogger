@@ -4,7 +4,7 @@ namespace VGLogger.API.ViewModels
 {
     public class CreateDeveloperViewModel
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
     public class CreateDeveloperValidator : AbstractValidator<CreateDeveloperViewModel>
@@ -12,7 +12,8 @@ namespace VGLogger.API.ViewModels
         public CreateDeveloperValidator()
         {
             RuleFor(x => x.Name)
-                .NotNull().WithMessage("Name must be not null")
+                .NotNull().WithMessage("Name must not be null")
+                .NotEmpty().WithMessage("Name must not be empty")
                 .MaximumLength(255).WithMessage("Maximum character limit of 255 characters");
         }
     }
