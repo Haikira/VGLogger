@@ -34,7 +34,18 @@ namespace VGLogger.API.Integration.Test.Controllers
         [Fact]
         public async Task GetById_WhenGameExists_ReturnsOk()
         {
-            throw new NotImplementedException();
+            const int id = 1;
+            var response = await _httpClient.GetAsync($"/games/{id}");
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var value = await response.Content.ReadAsStringAsync();
+
+            var result = value.VerifyDeSerialize<GameDetailViewModel>();
+
+            result.Id.Should().Be(1);
+            result.Name.Should().Be("TestGame");
+
+            _testOutputHelper.WriteLine(value);
         }
 
         [Fact]
@@ -57,7 +68,19 @@ namespace VGLogger.API.Integration.Test.Controllers
         [Fact]
         public async Task Update_WhenNewGameDetailsInvalid_ReturnsValidationErrors()
         {
-            throw new NotImplementedException();
+            const int id = 1;
+            var updateGame = new UpdateGameViewModel();
+
+            var response = await _httpClient.PutAsJsonAsync($"/games/{id}", updateGame);
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            var value = await response.Content.ReadAsStringAsync();
+
+            var result = value.VerifyDeSerialize<ValidationModel>();
+            result.Errors.CheckIfErrorPresent("Name", "Name must not be null");
+            result.Errors.CheckIfErrorPresent("Description", "Description must not be null");
+
+            _testOutputHelper.WriteLine(value);
         }
     }
 }
